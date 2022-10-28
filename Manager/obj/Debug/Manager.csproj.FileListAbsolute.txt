@@ -1,0 +1,15 @@
+D:\visual\Manager\Manager\obj\Debug\Manager.csproj.AssemblyReference.cache
+D:\visual\Manager\Manager\obj\Debug\Manager.csproj.SuggestedBindingRedirects.cache
+D:\visual\Manager\Manager\obj\Debug\Manager.Properties.Resources.resources
+D:\visual\Manager\Manager\obj\Debug\Manager.csproj.GenerateResource.cache
+D:\visual\Manager\Manager\obj\Debug\Manager.csproj.CoreCompileInputs.cache
+D:\visual\Manager\Manager\bin\Debug\Manager.exe.config
+D:\visual\Manager\Manager\bin\Debug\Manager.exe
+D:\visual\Manager\Manager\bin\Debug\Manager.pdb
+D:\visual\Manager\Manager\obj\Debug\Manager.exe
+D:\visual\Manager\Manager\obj\Debug\Manager.pdb
+D:\visual\Manager\Manager\obj\Debug\Manager.Form1.resources
+D:\visual\Manager\Manager\bin\Debug\nunit.framework.dll
+D:\visual\Manager\Manager\bin\Debug\nunit.framework.xml
+D:\visual\Manager\Manager\obj\Debug\Manager.csproj.CopyComplete
+D:\visual\Manager\Manager\obj\Debug\Manager.form.AddForm.resources
