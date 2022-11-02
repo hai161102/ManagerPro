@@ -9,40 +9,41 @@ namespace Manager.model
     public class NhanVien
     {
         private int id;
-        private string maChiNhanh;
         private string hoTen;
         private string soDienThoai;
-        private string maChucVu;
         private DateTime ngaySinh;
         private string gioiTinh;
         private string queQuan;
-        private float bacLuong;
+        private ChiNhanh chiNhanh;
+        private ChucVu chucVu;
+        private Luong bacLuong;
+
 
         public NhanVien()
         {
         }
 
-        public NhanVien(int id, string maChiNhanh, string hoTen, string soDienThoai, string maChucVu, DateTime ngaySinh,string gioiTinh, string queQuan, float bacLuong)
+        public NhanVien(int id, string hoTen, string soDienThoai, DateTime ngaySinh, string gioiTinh, string queQuan, ChiNhanh chiNhanh, ChucVu chucVu, Luong bacLuong)
         {
             this.Id = id;
-            this.MaChiNhanh = maChiNhanh;
             this.HoTen = hoTen;
             this.SoDienThoai = soDienThoai;
-            this.MaChucVu = maChucVu;
             this.NgaySinh = ngaySinh;
-            this.gioiTinh = gioiTinh;
+            this.GioiTinh = gioiTinh;
             this.QueQuan = queQuan;
+            this.ChiNhanh = chiNhanh;
+            this.ChucVu = chucVu;
             this.BacLuong = bacLuong;
         }
 
         public int Id { get => id; set => id = value; }
-        public string MaChiNhanh { get => maChiNhanh; set => maChiNhanh = value; }
         public string HoTen { get => hoTen; set => hoTen = value; }
         public string SoDienThoai { get => soDienThoai; set => soDienThoai = value; }
-        public string MaChucVu { get => maChucVu; set => maChucVu = value; }
         public DateTime NgaySinh { get => ngaySinh; set => ngaySinh = value; }
-        public string QueQuan { get => queQuan; set => queQuan = value; }
-        public float BacLuong { get => bacLuong; set => bacLuong = value; }
         public string GioiTinh { get => gioiTinh; set => gioiTinh = value; }
+        public string QueQuan { get => queQuan; set => queQuan = value; }
+        public ChiNhanh ChiNhanh { get => chiNhanh; set => chiNhanh = value; }
+        public ChucVu ChucVu { get => chucVu; set => chucVu = value; }
+        public Luong BacLuong { get => bacLuong; set => bacLuong = value; }
     }
 }

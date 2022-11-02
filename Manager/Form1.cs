@@ -25,14 +25,13 @@ namespace Manager
         private List<string> lTableView = new List<string> ();
         private List<NhanVien> listNhanVien = new List<NhanVien> ();
         private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>(); 
+        private BindingSource bindingSource = new BindingSource();
 
         public Form1()
         {
             InitializeComponent();
             databasePresenter = new DatabasePresenter(this);
-            listNhanVien = databasePresenter.getManagerDao().getNhanVienList();
-            var list = new BindingList<NhanVien>(listNhanVien);
-            dataGridView.DataSource = list;
+            
         }
 
         private void showSignInView(object sender, EventArgs e)
@@ -149,12 +148,17 @@ namespace Manager
 
         public void onResultSuccess(object data)
         {
-            
+            List<NhanVien> nhanViens = (List<NhanVien>)data;
+            nhanViens.ForEach(n =>
+            {
+                bindingSource.Add(n);
+            });
+            dataGridView1.DataSource = bindingSource;
         }
 
         public void onResultError(string message)
         {
-            
+            MessageBox.Show(message);
         }
 
         private void toolStripMenuItem1_Click_2(object sender, EventArgs e)
@@ -205,19 +209,32 @@ namespace Manager
             listSearch.Clear();
             menuItems.Clear();
             PropertyInfo[] map = GetAuthors<NhanVien>();
+            menuItems.AddRange(getListMenu(map));
+            this.search.DropDownItems.AddRange(menuItems.ToArray());
+        }
+
+        private List<ToolStripMenuItem> getListMenu(PropertyInfo[] map)
+        {
+            List<ToolStripMenuItem> listMenu = new List<ToolStripMenuItem>();
             foreach (PropertyInfo item in map)
             {
                 ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(item.Name);
                 toolStripMenuItem.Name = item.Name;
-                menuItems.Add(toolStripMenuItem);
-                listSearch.Add(item.Name);
+                if (item.PropertyType.IsClass && item.PropertyType != typeof(string))
+                {
+
+                    toolStripMenuItem.DropDownItems.AddRange(getListMenu(item.PropertyType.GetProperties()).ToArray());
+                }
+                listMenu.Add(toolStripMenuItem);
             }
-            menuItems.ForEach(item =>
-            {
-                this.search.DropDownItems.Add(item);
-            });
+
+            return listMenu;
         }
 
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
         //private List<NhanVien> getList()
         //{
         //    return new List<NhanVien>()

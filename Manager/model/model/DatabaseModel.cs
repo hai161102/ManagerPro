@@ -16,7 +16,7 @@ namespace Manager.model.model
         public DatabaseModel(IDatabaseModel database)
         {
             _database = database;
-            managerDao = new ManagerDao();
+            managerDao = new ManagerDao(_database);
             
         }
 
