@@ -1,5 +1,7 @@
 ﻿using Manager.model;
+using Manager.model.instance;
 using Manager.model.model;
+using Manager.model.model.account;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -14,13 +16,20 @@ namespace Manager.db
     {
         private SqlConnection connection;
         private IDatabaseModel iDatabaseModel;
+        private ILoginModel iLoginModel;
+        public void setIDatabaseModel(IDatabaseModel databaseModel)
+        {
+            this.iDatabaseModel = databaseModel;
+        }
 
-        public ManagerDao(IDatabaseModel database)
+        public void setILoginModel(ILoginModel loginModel)
+        {
+            this.iLoginModel = loginModel;
+        }
+        public ManagerDao()
 
         {
-            this.iDatabaseModel = database;
             connection = new SqlConnection("Data Source=HAI;Initial Catalog=Manager_gr_12;Integrated Security=True");
-            getNhanVienList();
         }
 
         public void getNhanVienList()
@@ -87,6 +96,197 @@ namespace Manager.db
             }
             iDatabaseModel.onSuccess(list);
 
+        }
+        public void getNhanVienList(int id)
+        {
+            List<NhanVien> list = new List<NhanVien>();
+            using (connection)
+            {
+                try
+                {
+                    string query = "Select * from Manager where managerId = " + id;
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    connection.Open();
+                    using (SqlDataReader oReader = cmd.ExecuteReader())
+                    {
+                        while (oReader.Read())
+                        {
+                            try
+                            {
+
+                                ChiNhanh chinhanh = new ChiNhanh();
+                                ChucVu chucVu = new ChucVu();
+                                Luong luong = new Luong();
+
+                                chinhanh.MaChiNhanh = oReader["stateId"].ToString();
+                                chucVu.MaChucVu = oReader["levelId"].ToString();
+                                luong.BacLuong = Int32.Parse(oReader["salaryId"].ToString());
+
+                                list.Add(new NhanVien(
+                                Int32.Parse(oReader["managerId"].ToString()),
+                                oReader["managerName"].ToString(),
+                                oReader["managerNumber"].ToString(),
+                                DateTime.Parse(oReader["managerDob"].ToString()),
+                                oReader["managerSex"].ToString(),
+                                oReader["managerHometown"].ToString(),
+                                chinhanh,
+                                chucVu,
+                                luong)
+                                );
+
+                            }
+                            catch (Exception e)
+                            {
+                                iDatabaseModel.onFailure(e.Message);
+                            }
+
+                        }
+                        cmd.Dispose();
+
+                        connection.Close();
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    iDatabaseModel.onFailure(e.Message);
+                }
+                list.ForEach(o =>
+                {
+                    o.ChiNhanh = getChiNhanh("Select * from StateCompany where stateId = '" + o.ChiNhanh.MaChiNhanh + "'");
+                    o.ChucVu = getChucVu("Select * from LevelManager where levelId = '" + o.ChucVu.MaChucVu + "'");
+                    o.BacLuong = getLuong("Select * from Salary where salaryId = " + o.BacLuong.BacLuong);
+                });
+
+            }
+            iDatabaseModel.onSuccess(list);
+        }
+
+        public NhanVien getNhanVien(int id)
+        {
+            NhanVien nhanVien = new NhanVien();
+            using (connection)
+            {
+                try
+                {
+                    string query = "Select * from Manager where managerId = " + id;
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    connection.Open();
+                    using (SqlDataReader oReader = cmd.ExecuteReader())
+                    {
+                        while (oReader.Read())
+                        {
+                            try
+                            {
+
+                                ChiNhanh chinhanh = new ChiNhanh();
+                                ChucVu chucVu = new ChucVu();
+                                Luong luong = new Luong();
+
+                                chinhanh.MaChiNhanh = oReader["stateId"].ToString();
+                                chucVu.MaChucVu = oReader["levelId"].ToString();
+                                luong.BacLuong = Int32.Parse(oReader["salaryId"].ToString());
+
+                                nhanVien = new NhanVien(
+                                Int32.Parse(oReader["managerId"].ToString()),
+                                oReader["managerName"].ToString(),
+                                oReader["managerNumber"].ToString(),
+                                DateTime.Parse(oReader["managerDob"].ToString()),
+                                oReader["managerSex"].ToString(),
+                                oReader["managerHometown"].ToString(),
+                                chinhanh,
+                                chucVu,
+                                luong);
+
+                            }
+                            catch (Exception e)
+                            {
+                            }
+
+                        }
+                        cmd.Dispose();
+
+                        connection.Close();
+                    }
+
+                }
+                catch (Exception e)
+                {
+                }
+
+                nhanVien.ChiNhanh = getChiNhanh("Select * from StateCompany where stateId = '" + nhanVien.ChiNhanh.MaChiNhanh + "'");
+                nhanVien.ChucVu = getChucVu("Select * from LevelManager where levelId = '" + nhanVien.ChucVu.MaChucVu + "'");
+                nhanVien.BacLuong = getLuong("Select * from Salary where salaryId = " + nhanVien.BacLuong.BacLuong);
+                return nhanVien;
+
+            }
+        }
+
+        public void login(object obj)
+        {
+
+            AccountManager account = obj as AccountManager;
+            if (account != null)
+            {
+                UserAccount userAccount = new UserAccount();
+                using (connection)
+                {
+                    try
+                    {
+                        string query = "Select * from Account where username = '" + account.getUserName() + "' and pass = '"
+                            + account.getPassword() + "'";
+                        SqlCommand cmd = new SqlCommand(query, connection);
+                        connection.Open();
+                        using (SqlDataReader oReader = cmd.ExecuteReader())
+                        {
+                            while (oReader.Read())
+                            {
+                                try
+                                {
+                                    NhanVien nhanVien = new NhanVien();
+                                    nhanVien.Id = Int32.Parse(oReader["managerId"].ToString());
+                                    userAccount = new UserAccount(
+                                            oReader["username"].ToString(),
+                                            oReader["pass"].ToString(),
+                                            Int32.Parse(oReader["permission"].ToString()),
+                                            nhanVien
+                                        );
+                                    
+                                }
+                                catch (Exception e)
+                                {
+                                    iLoginModel.onLoginFailure(e.Message);
+                                }
+                            }
+                            cmd.Dispose();
+                            connection.Close();
+                            iLoginModel.onLoginSuccess(userAccount);
+
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+
+                        iLoginModel.onLoginFailure(e.Message);
+                    }
+                    //try
+                    //{
+                    //    NhanVien nhanVien = getNhanVien(userAccount.getNhanVien().Id);
+                    //    userAccount.getNhanVien().GioiTinh = nhanVien.GioiTinh;
+                    //    userAccount.getNhanVien().ChiNhanh = nhanVien.ChiNhanh;
+                    //    userAccount.getNhanVien().ChucVu = nhanVien.ChucVu;
+                    //    userAccount.getNhanVien().SoDienThoai = nhanVien.SoDienThoai;
+                    //    userAccount.getNhanVien().HoTen = nhanVien.HoTen;
+                    //    userAccount.getNhanVien().BacLuong = nhanVien.BacLuong;
+                    //}
+                    //catch (Exception e)
+                    //{
+                    //    iLoginModel.onLoginFailure(e.Message);
+                    //}
+                }
+                
+            }
         }
 
         private Luong getLuong(string sub3)

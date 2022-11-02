@@ -31,5 +31,17 @@ namespace Manager.form
         {
 
         }
+
+        private void maleRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radio = (RadioButton)sender;
+            radio.Checked = maleRadio.Checked;
+            femaleRadio.Checked = !maleRadio.Checked;
+        }
+
+        private void femaleRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            maleRadio.Checked = !femaleRadio.Checked;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Manager.form;
+using Manager.interfaces;
 using Manager.model;
 using Manager.model.instance;
 using Manager.presenter;
@@ -12,25 +13,21 @@ using System.Windows.Forms;
 
 namespace Manager
 {
-    public partial class Form1 : Form, IDataView
+    public partial class Form1 : Form, IDataView, LoginListener, ILoginView
     {
         private static LoginForm loginForm = new LoginForm();
         private string LOGIN = "Login";
-        private string SIGN_IN = "Sign Up";
+        private string SIGN_UP = "Sign Up";
         private string NORMAL = "Normal";
         private string ADMIN = "Admin";
-        private List<String> listSearch = new List<String>();
         private DatabasePresenter databasePresenter;
-        private static string columTag = "";
-        private List<string> lTableView = new List<string> ();
-        private List<NhanVien> listNhanVien = new List<NhanVien> ();
+        private LoginPresenter loginPresenter;
         private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>(); 
         private BindingSource bindingSource = new BindingSource();
 
         public Form1()
         {
             InitializeComponent();
-            databasePresenter = new DatabasePresenter(this);
             
         }
 
@@ -41,11 +38,16 @@ namespace Manager
 
         private void showLoginView(object sender, EventArgs e)
         {
-            loginForm.onCloseClick = new AfterCLoseView(this);
-            loginForm.Show();
-            this.Enabled = false;
+            loginPresenter = new LoginPresenter(this);
+            dataGridView1.Visible = false;
+            noAccount.Visible = false;
+            panel1.Visible = true;
         }
-
+        //{
+        //    loginForm = new LoginForm(this);
+        //    loginForm.onCloseClick = new AfterCLoseView(this);
+        //    loginForm.Show();
+        //    this.Enabled = false;
 
         private void setViewNormal()
         {
@@ -54,11 +56,10 @@ namespace Manager
             {
                 this.accountOption1.Text = LOGIN;
                 this.accountOption1.Name = LOGIN;
-                this.accountOption2.Text = SIGN_IN;
-                this.accountOption2.Name = SIGN_IN;
-
-                this.accountOption1.Click += showLoginView;
-                this.accountOption2.Click += showSignInView;
+                this.accountOption2.Text = SIGN_UP;
+                this.accountOption2.Name = SIGN_UP;
+                noAccount.Visible = true;
+                dataGridView1.Visible = false;
             }
             else
             {
@@ -66,21 +67,35 @@ namespace Manager
                 this.accountOption1.Name = NORMAL;
                 this.accountOption2.Text = ADMIN;
                 this.accountOption2.Name = ADMIN;
-
-                this.accountOption1.Click += setUserNormalView;
-                this.accountOption2.Click += setUserAdminView;
-
+                noAccount.Visible = false;
+                dataGridView1.Visible = true;
+                if (databasePresenter == null)
+                {
+                    databasePresenter = new DatabasePresenter(this);
+                }
+                switch (CurrentAccount.getInstance().getAccount().getPermission())
+                {
+                    case 1:
+                        setViewAdmin();
+                        break;
+                    case 2:
+                        setViewNormalUser();
+                        break;
+                    default:
+                        break;
+                }
+                
             }
         }
 
-        private void setUserAdminView(object sender, EventArgs e)
+        private void setViewNormalUser()
         {
-            
+
         }
 
-        private void setUserNormalView(object sender, EventArgs e)
+        private void setViewAdmin()
         {
-            
+
         }
 
         private class AfterCLoseView : OnClickListener
@@ -142,18 +157,13 @@ namespace Manager
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
-            columTag = menuItem.Name;
             databasePresenter.search(menuItem.Name);
         }
 
         public void onResultSuccess(object data)
         {
             List<NhanVien> nhanViens = (List<NhanVien>)data;
-            nhanViens.ForEach(n =>
-            {
-                bindingSource.Add(n);
-            });
-            dataGridView1.DataSource = bindingSource;
+            setDataSource(nhanViens);
         }
 
         public void onResultError(string message)
@@ -205,29 +215,23 @@ namespace Manager
         private void Form1_Load_1(object sender, EventArgs e)
         {
             setViewNormal();
-            this.search.DropDownItems.Clear();
-            listSearch.Clear();
-            menuItems.Clear();
-            PropertyInfo[] map = GetAuthors<NhanVien>();
-            menuItems.AddRange(getListMenu(map));
-            this.search.DropDownItems.AddRange(menuItems.ToArray());
+            
         }
 
-        private List<ToolStripMenuItem> getListMenu(PropertyInfo[] map)
+        private List<ToolStripMenuItem> getListMenu(Type propertyInfo)
         {
             List<ToolStripMenuItem> listMenu = new List<ToolStripMenuItem>();
-            foreach (PropertyInfo item in map)
+
+            if (propertyInfo.IsClass && propertyInfo != typeof(string))
             {
-                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(item.Name);
-                toolStripMenuItem.Name = item.Name;
-                if (item.PropertyType.IsClass && item.PropertyType != typeof(string))
+                foreach (PropertyInfo item in propertyInfo.GetProperties())
                 {
-
-                    toolStripMenuItem.DropDownItems.AddRange(getListMenu(item.PropertyType.GetProperties()).ToArray());
+                    ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(item.Name);
+                    toolStripMenuItem.Name = item.Name;
+                    toolStripMenuItem.DropDownItems.AddRange(getListMenu(item.PropertyType).ToArray());
+                    listMenu.Add(toolStripMenuItem);
                 }
-                listMenu.Add(toolStripMenuItem);
             }
-
             return listMenu;
         }
 
@@ -235,18 +239,115 @@ namespace Manager
         {
 
         }
-        //private List<NhanVien> getList()
-        //{
-        //    return new List<NhanVien>()
-        //    {
-        //        new NhanVien(0, "CN1", "Tran Hai", "0946197396", "QL", new DateTime(), "Nam Dinh", 2.5f),
-        //        new NhanVien(0, "CN1", "Tran Hai", "0946197396", "QL", new DateTime(), "Nam Dinh", 2.5f),
-        //        new NhanVien(0, "CN1", "Tran Hai", "0946197396", "QL", new DateTime(), "Nam Dinh", 2.5f),
-        //        new NhanVien(0, "CN1", "Tran Hai", "0946197396", "QL", new DateTime(), "Nam Dinh", 2.5f),
-        //        new NhanVien(0, "CN1", "Tran Hai", "0946197396", "QL", new DateTime(), "Nam Dinh", 2.5f),
-        //        new NhanVien(0, "CN1", "Tran Hai", "0946197396", "QL", new DateTime(), "Nam Dinh", 2.5f),
-        //        new NhanVien(0, "CN1", "Tran Hai", "0946197396", "QL", new DateTime(), "Nam Dinh", 2.5f)
-        //    };
-        //}
+
+        public void loginSuccess()
+        {
+            //setDataSource(CurrentAccount.getInstance().getAccount().getNhanVien());
+            if (databasePresenter == null)
+            {
+                databasePresenter = new DatabasePresenter(this);
+            }
+            databasePresenter.getManagerDao().getNhanVienList(CurrentAccount.getInstance().getAccount().getNhanVien().Id);
+        }
+
+        public void gotoSignUp()
+        {
+
+        }
+        private void setDataSource<T>(List<T> datas)
+        {
+            bindingSource.Clear();
+            foreach (T item in datas)
+            {
+                bindingSource.Add(item);
+            }
+            this.search.DropDownItems.Clear();
+            menuItems.Clear();
+            menuItems.AddRange(getListMenu(typeof(T)));
+            this.search.DropDownItems.AddRange(menuItems.ToArray());
+            dataGridView1.DataSource = bindingSource;
+            setViewNormal();
+        }
+        private void setDataSource<T>(T datas)
+        {
+            bindingSource.Clear();
+            bindingSource.Add(datas);
+
+            this.search.DropDownItems.Clear();
+            menuItems.Clear();
+            menuItems.AddRange(getListMenu(typeof(T)));
+            this.search.DropDownItems.AddRange(menuItems.ToArray());
+            dataGridView1.DataSource = bindingSource;
+            setViewNormal();
+        }
+
+        private void panel1_ControlAdded(object sender, ControlEventArgs e)
+        {
+
+        }
+
+        private void signin_Click(object sender, EventArgs e)
+        {
+            AccountManager account = new AccountManager();
+            account.setUserName(tb_user.Text.Trim());
+            account.setPassword(tb_pass.Text.Trim());
+            loginPresenter.login(account);
+        }
+
+        private void signup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_user_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_pass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public void onLoginSuccess(object data)
+        {
+            this.panel1.Visible = false;
+            this.dataGridView1.Visible = true;
+            CurrentAccount.getInstance().setAccount((UserAccount)data);
+            if (databasePresenter == null)
+            {
+                databasePresenter = new DatabasePresenter(this);
+            }
+
+            databasePresenter.getManagerDao().getNhanVienList(CurrentAccount.getInstance().getAccount().getNhanVien().Id);
+        }
+
+        public void onLoginFailure(string message)
+        {
+        }
+
+        private void accountOption2_Click(object sender, EventArgs e)
+        {
+            if (accountOption2.Name == ADMIN)
+            {
+                databasePresenter.getManagerDao().getNhanVienList();
+            }
+            if (accountOption2.Name == SIGN_UP)
+            {
+
+            }
+        }
+
+        private void accountOption1_Click(object sender, EventArgs e)
+        {
+            if (accountOption1.Name == LOGIN)
+            {
+                showLoginView(sender, e);
+            }
+            if (accountOption1.Name == NORMAL)
+            {
+
+            }
+        }
     }
 }

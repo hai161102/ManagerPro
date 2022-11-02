@@ -126,43 +126,43 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="search.Text" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="add.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="add.Text" xml:space="preserve">
     <value>Add</value>
   </data>
   <data name="update.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="update.Text" xml:space="preserve">
     <value>Update</value>
   </data>
   <data name="delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="delete.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="view.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="view.Text" xml:space="preserve">
     <value>View</value>
   </data>
   <data name="exit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="exit.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>127, 6</value>
   </data>
   <data name="option.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -174,13 +174,13 @@
     <value>Option</value>
   </data>
   <data name="accountOption1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 26</value>
+    <value>180, 26</value>
   </data>
   <data name="accountOption1.Text" xml:space="preserve">
     <value>Normal</value>
   </data>
   <data name="accountOption2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 26</value>
+    <value>180, 26</value>
   </data>
   <data name="accountOption2.Text" xml:space="preserve">
     <value>Admin</value>
@@ -217,7 +217,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="dataGridView1.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>24</value>
@@ -244,6 +244,363 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="noAccount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="noAccount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 15.75pt</value>
+  </data>
+  <data name="noAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 24</value>
+  </data>
+  <data name="noAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1014, 512</value>
+  </data>
+  <data name="noAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="noAccount.Text" xml:space="preserve">
+    <value>You must login to view data!</value>
+  </data>
+  <data name="noAccount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="noAccount.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;noAccount.Name" xml:space="preserve">
+    <value>noAccount</value>
+  </data>
+  <data name="&gt;&gt;noAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;noAccount.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;noAccount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="signup.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="signup.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 11.25pt, style=Bold</value>
+  </data>
+  <data name="signup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 10</value>
+  </data>
+  <data name="signup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 45</value>
+  </data>
+  <data name="signup.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="signup.Text" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="&gt;&gt;signup.Name" xml:space="preserve">
+    <value>signup</value>
+  </data>
+  <data name="&gt;&gt;signup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;signup.Parent" xml:space="preserve">
+    <value>panel4</value>
+  </data>
+  <data name="&gt;&gt;signup.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 68</value>
+  </data>
+  <data name="panel4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>100, 10, 100, 10</value>
+  </data>
+  <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>914, 65</value>
+  </data>
+  <data name="panel4.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panel4.Name" xml:space="preserve">
+    <value>panel4</value>
+  </data>
+  <data name="&gt;&gt;panel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel4.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="signin.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="signin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt, style=Bold</value>
+  </data>
+  <data name="signin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 10</value>
+  </data>
+  <data name="signin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 48</value>
+  </data>
+  <data name="signin.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="signin.Text" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="&gt;&gt;signin.Name" xml:space="preserve">
+    <value>signin</value>
+  </data>
+  <data name="&gt;&gt;signin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;signin.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;signin.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panel3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>100, 10, 100, 10</value>
+  </data>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>914, 68</value>
+  </data>
+  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 312</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>914, 150</value>
+  </data>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tb_pass.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="tb_pass.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 200</value>
+  </data>
+  <data name="tb_pass.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="tb_pass.Size" type="System.Drawing.Size, System.Drawing">
+    <value>763, 27</value>
+  </data>
+  <data name="tb_pass.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tb_pass.Name" xml:space="preserve">
+    <value>tb_pass</value>
+  </data>
+  <data name="&gt;&gt;tb_pass.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_pass.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;tb_pass.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tb_user.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="tb_user.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 127</value>
+  </data>
+  <data name="tb_user.Size" type="System.Drawing.Size, System.Drawing">
+    <value>763, 27</value>
+  </data>
+  <data name="tb_user.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tb_user.Name" xml:space="preserve">
+    <value>tb_user</value>
+  </data>
+  <data name="&gt;&gt;tb_user.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_user.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;tb_user.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pass.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pass.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt, style=Bold</value>
+  </data>
+  <data name="pass.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pass.Location" type="System.Drawing.Point, System.Drawing">
+    <value>53, 200</value>
+  </data>
+  <data name="pass.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 50, 3, 0</value>
+  </data>
+  <data name="pass.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 21</value>
+  </data>
+  <data name="pass.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="pass.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="&gt;&gt;pass.Name" xml:space="preserve">
+    <value>pass</value>
+  </data>
+  <data name="&gt;&gt;pass.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pass.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;pass.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="user_name.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="user_name.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt, style=Bold</value>
+  </data>
+  <data name="user_name.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 129</value>
+  </data>
+  <data name="user_name.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 50, 3, 0</value>
+  </data>
+  <data name="user_name.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 21</value>
+  </data>
+  <data name="user_name.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="user_name.Text" xml:space="preserve">
+    <value>UserName</value>
+  </data>
+  <data name="&gt;&gt;user_name.Name" xml:space="preserve">
+    <value>user_name</value>
+  </data>
+  <data name="&gt;&gt;user_name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;user_name.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;user_name.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="title_login.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="title_login.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 15.75pt, style=Bold</value>
+  </data>
+  <data name="title_login.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 50</value>
+  </data>
+  <data name="title_login.Size" type="System.Drawing.Size, System.Drawing">
+    <value>914, 48</value>
+  </data>
+  <data name="title_login.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="title_login.Text" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="title_login.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;title_login.Name" xml:space="preserve">
+    <value>title_login</value>
+  </data>
+  <data name="&gt;&gt;title_login.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;title_login.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;title_login.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 24</value>
+  </data>
+  <data name="panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>50, 50, 50, 50</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1014, 512</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="panel1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

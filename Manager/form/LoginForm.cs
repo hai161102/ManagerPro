@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Manager.interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +13,15 @@ namespace Manager.form
 {
     public partial class LoginForm : Form
     {
+        private LoginListener loginListener;
         public LoginForm()
         {
+            InitializeComponent();
+        }
+
+        public LoginForm(LoginListener loginListener)
+        {
+            this.loginListener = loginListener;
             InitializeComponent();
         }
     }

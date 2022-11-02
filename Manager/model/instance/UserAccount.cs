@@ -6,11 +6,26 @@ using System.Threading.Tasks;
 
 namespace Manager.model.instance
 {
-    public class UserAccount
+    public class UserAccount : AccountManager
     {
-        public static implicit operator UserAccount(CurrentAccount v)
+        private NhanVien nhanVien;
+        public UserAccount()
         {
-            throw new NotImplementedException();
+        }
+
+        public UserAccount(string username, string password, int permission, NhanVien nhanVien) : base(username, password, permission)
+        {
+            this.nhanVien = nhanVien;
+        }
+
+        public NhanVien getNhanVien()
+        {
+            return nhanVien;
+        }
+
+        public void setNhanVien(NhanVien nhan)
+        {
+            this.nhanVien = nhan;
         }
     }
 }

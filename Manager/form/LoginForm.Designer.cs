@@ -1,11 +1,15 @@
-﻿using Manager.view;
+﻿using Manager.model;
+using Manager.model.instance;
+using Manager.presenter;
+using Manager.view;
+using Manager.view.interfaces;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Manager.form
 {
-    partial class LoginForm
+    partial class LoginForm : ILoginView
     {
         /// <summary>
         /// Required designer variable.
@@ -18,6 +22,7 @@ namespace Manager.form
         private ButtonView signUpButton;
         public const string CANCEL_BUTTON = "CANCEL_BUTTON";
         public OnClickListener onCloseClick;
+        private LoginPresenter loginPresenter;
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -41,6 +46,7 @@ namespace Manager.form
         /// </summary>
         private void InitializeComponent()
         {
+            loginPresenter = new LoginPresenter(this);
             Image bgImage = Image.FromHbitmap(Properties.Resources.login_bg.GetHbitmap());
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -76,8 +82,8 @@ namespace Manager.form
 
         private void addViewSignIn()
         {
-            createNewInputBox("Username", "Username", 0, 100);
-            createNewInputBox("Password", "Password", 0, 150);
+            createNewInputBox("Username", "Usernametxt", 0, 100);
+            createNewInputBox("Password", "Passwordtxt", 0, 150);
             setupButtonSignIn("Sign In", this.Width / 2, 250, new OnSignInClick(this));
             setupButtonSignUp("Sign up", this.Width / 2, 300, new OnSignUpClick(this));
         }
@@ -142,6 +148,23 @@ namespace Manager.form
             signUpButton.Font = new Font(Const.FONT_FAMILY, 12, FontStyle.Regular);
             this.Controls.Add(signUpButton);
         }
+        public void onLoginSuccess(object data)
+        {
+            if (data != null)
+            {
+                CurrentAccount.getInstance().setAccount((UserAccount)data);
+                if (loginListener != null)
+                {
+                    loginListener.loginSuccess();
+                    this.Close();
+                }
+            }
+        }
+
+        public void onLoginFailure(string message)
+        {
+            MessageBox.Show(message);
+        }
 
         private class OnCancelClick : OnClickListener
         {
@@ -162,16 +185,22 @@ namespace Manager.form
 
         private class OnSignInClick : OnClickListener
         {
-            private Form Form;
+            private LoginForm Form;
 
-            public OnSignInClick(Form form)
+            public OnSignInClick(LoginForm form)
             {
                 Form = form;
             }
 
             public void OnClick(EventArgs e)
             {
-
+                AccountManager account = new AccountManager();
+                Panel panel = (Panel)Form.Controls["Username" + "Usernametxt"];
+                Panel panel1 = (Panel)Form.Controls["Password" + "Passwordtxt"];
+                
+                account.setUserName(((TextBox)panel.Controls["Usernametxt"]).Text);
+                account.setPassword(((TextBox)panel1.Controls["Passwordtxt"]).Text);
+                Form.loginPresenter.login(account);
             }
         }
 

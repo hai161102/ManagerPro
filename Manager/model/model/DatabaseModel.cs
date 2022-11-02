@@ -16,7 +16,8 @@ namespace Manager.model.model
         public DatabaseModel(IDatabaseModel database)
         {
             _database = database;
-            managerDao = new ManagerDao(_database);
+            managerDao = new ManagerDao();
+            managerDao.setIDatabaseModel(_database);
             
         }
 
@@ -49,14 +50,5 @@ namespace Manager.model.model
 
         }
 
-        public void login(Object obj)
-        {
-
-        }
-
-        public void signup(Object obj)
-        {
-
-        }
     }
 }
