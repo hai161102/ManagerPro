@@ -188,10 +188,9 @@ namespace Manager
 
         private void add_Click(object sender, EventArgs e)
         {
-            AddForm add = new AddForm();
+            AddForm add = new AddForm(new ViewControlAddForm(this));
             add.Show();
         }
-
         private void update_Click(object sender, EventArgs e)
         {
 
@@ -347,6 +346,27 @@ namespace Manager
             if (accountOption1.Name == NORMAL)
             {
 
+            }
+        }
+
+        private class ViewControlAddForm : OnViewControlListener
+        {
+            Form1 form;
+
+            public ViewControlAddForm(Form1 form)
+            {
+                this.form = form;
+            }
+
+
+            public void onAgree(object[] datas)
+            {
+                form.databasePresenter.addMember(datas[0]);
+            }
+
+            public void onCancel()
+            {
+                
             }
         }
     }

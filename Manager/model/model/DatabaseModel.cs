@@ -37,7 +37,7 @@ namespace Manager.model.model
 
         public void add(Object obj)
         {
-            
+            managerDao.insertData(obj);
         }
 
         public void remove(Object obj)

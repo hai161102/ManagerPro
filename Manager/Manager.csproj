@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="interfaces\LoginListener.cs" />
     <Compile Include="interfaces\OnClickListener.cs" />
+    <Compile Include="interfaces\OnViewControlListener.cs" />
     <Compile Include="model\AccountManager.cs" />
     <Compile Include="model\ChiNhanh.cs" />
     <Compile Include="model\ChucVu.cs" />
