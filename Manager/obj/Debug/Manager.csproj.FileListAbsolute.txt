@@ -8,8 +8,9 @@ D:\visual\Manager\Manager\bin\Debug\Manager.exe
 D:\visual\Manager\Manager\bin\Debug\Manager.pdb
 D:\visual\Manager\Manager\obj\Debug\Manager.exe
 D:\visual\Manager\Manager\obj\Debug\Manager.pdb
-D:\visual\Manager\Manager\obj\Debug\Manager.Form1.resources
 D:\visual\Manager\Manager\bin\Debug\nunit.framework.dll
 D:\visual\Manager\Manager\bin\Debug\nunit.framework.xml
 D:\visual\Manager\Manager\obj\Debug\Manager.csproj.CopyComplete
 D:\visual\Manager\Manager\obj\Debug\Manager.form.AddForm.resources
+D:\visual\Manager\Manager\obj\Debug\Manager.form.LoginFrom.resources
+D:\visual\Manager\Manager\obj\Debug\Manager.MainForm.resources

@@ -13,9 +13,8 @@ using System.Windows.Forms;
 
 namespace Manager
 {
-    public partial class Form1 : Form, IDataView, LoginListener, ILoginView
+    public partial class MainForm : Form, IDataView, LoginListener, ILoginView
     {
-        private static LoginForm loginForm = new LoginForm();
         private string LOGIN = "Login";
         private string SIGN_UP = "Sign Up";
         private string NORMAL = "Normal";
@@ -25,7 +24,7 @@ namespace Manager
         private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>(); 
         private BindingSource bindingSource = new BindingSource();
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             
@@ -100,9 +99,9 @@ namespace Manager
 
         private class AfterCLoseView : OnClickListener
         {
-            private Form1 form1;
+            private MainForm form1;
 
-            public AfterCLoseView(Form1 form1)
+            public AfterCLoseView(MainForm form1)
             {
                 this.form1 = form1;
             }
@@ -341,7 +340,9 @@ namespace Manager
         {
             if (accountOption1.Name == LOGIN)
             {
-                showLoginView(sender, e);
+                //showLoginView(sender, e);
+                LoginFrom login = new LoginFrom();
+                login.Show();
             }
             if (accountOption1.Name == NORMAL)
             {
@@ -351,9 +352,9 @@ namespace Manager
 
         private class ViewControlAddForm : OnViewControlListener
         {
-            Form1 form;
+            MainForm form;
 
-            public ViewControlAddForm(Form1 form)
+            public ViewControlAddForm(MainForm form)
             {
                 this.form = form;
             }

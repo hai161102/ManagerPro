@@ -23,7 +23,7 @@ namespace Manager
             Const.FONT_FAMILY = Const.getFont(Properties.Resources.Roboto_Regular).Families[0];
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }
