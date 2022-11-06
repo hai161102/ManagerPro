@@ -16,5 +16,23 @@ namespace Manager.form
         {
             InitializeComponent();
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // LoginForm
+            // 
+            this.ClientSize = new System.Drawing.Size(773, 410);
+            this.Name = "LoginForm";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

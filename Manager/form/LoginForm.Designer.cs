@@ -30,6 +30,8 @@ namespace Manager.form
             }
             base.Dispose(disposing);
         }
+<<<<<<< HEAD
+=======
         #region Windows Form Designer generated code
         
         
@@ -189,5 +191,6 @@ namespace Manager.form
             }
         }
         #endregion
+>>>>>>> b9be12c83e24c9a9737d2b267e8056791c0ee761
     }
 }

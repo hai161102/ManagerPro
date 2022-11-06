@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Manager.form;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Manager.view
 {
+    
     public class ButtonView : Button
     {
         private int width1;
@@ -78,6 +80,9 @@ namespace Manager.view
         {
             base.OnClick(e);
             onClickListener.OnClick(e);
+            InformationForm formHSNV = new InformationForm();
+            formHSNV.Show();
+            //LoginForm.Close();
         }
 
         public ButtonView getDefaultView()

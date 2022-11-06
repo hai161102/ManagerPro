@@ -6,7 +6,6 @@ using Manager.view.interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -22,9 +21,9 @@ namespace Manager
         private List<String> listSearch = new List<String>();
         private DatabasePresenter databasePresenter;
         private static string columTag = "";
-        private List<string> lTableView = new List<string> ();
-        private List<NhanVien> listNhanVien = new List<NhanVien> ();
-        private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>(); 
+        private List<string> lTableView = new List<string>();
+        private List<NhanVien> listNhanVien = new List<NhanVien>();
+        private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
 
         public Form1()
         {
@@ -37,7 +36,7 @@ namespace Manager
 
         private void showSignInView(object sender, EventArgs e)
         {
-            
+
         }
 
         private void showLoginView(object sender, EventArgs e)
@@ -76,12 +75,12 @@ namespace Manager
 
         private void setUserAdminView(object sender, EventArgs e)
         {
-            
+
         }
 
         private void setUserNormalView(object sender, EventArgs e)
         {
-            
+
         }
 
         private class AfterCLoseView : OnClickListener
@@ -101,7 +100,7 @@ namespace Manager
 
         private void searchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void addMemberToolStripMenuItem_Click(object sender, EventArgs e)
@@ -149,12 +148,12 @@ namespace Manager
 
         public void onResultSuccess(object data)
         {
-            
+
         }
 
         public void onResultError(string message)
         {
-            
+
         }
 
         private void toolStripMenuItem1_Click_2(object sender, EventArgs e)
@@ -216,6 +215,19 @@ namespace Manager
             {
                 this.search.DropDownItems.Add(item);
             });
+        }
+
+        private void accountOption1_Click(object sender, EventArgs e)
+        {
+            Form1 f1 = new Form1();
+            InformationForm formHSNV = new InformationForm();
+            formHSNV.ShowDialog();
+            f1.Hide();
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         //private List<NhanVien> getList()
