@@ -17,7 +17,6 @@ namespace Manager.model
         private string gioiTinh;
         private string queQuan;
         private float bacLuong;
-
         public NhanVien()
         {
         }

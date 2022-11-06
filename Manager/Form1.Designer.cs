@@ -128,6 +128,7 @@ namespace Manager
             // 
             this.accountOption1.Name = "accountOption1";
             resources.ApplyResources(this.accountOption1, "accountOption1");
+            this.accountOption1.Click += new System.EventHandler(this.accountOption1_Click);
             // 
             // accountOption2
             // 
@@ -141,6 +142,7 @@ namespace Manager
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // Form1
             // 
