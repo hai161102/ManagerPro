@@ -47,16 +47,6 @@ namespace Manager.presenter
             model.update(current, updateObj);
         }
 
-        public void login(Object obj)
-        {
-            model.login(obj);
-        }
-
-        public void signup(Object obj)
-        {
-            model.signup(obj);
-        }
-
         public ArrayList search(Object obj)
         {
             return model.search(obj);

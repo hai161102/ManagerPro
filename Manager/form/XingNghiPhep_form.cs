@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace Manager.form
 {
-    public partial class LoginForm : Form
+    public partial class XingNghiPhep_form : Form
     {
-        public LoginForm()
+        public XingNghiPhep_form()
         {
             InitializeComponent();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

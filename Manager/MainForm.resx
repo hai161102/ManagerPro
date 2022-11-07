@@ -126,43 +126,43 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="search.Text" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="add.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="add.Text" xml:space="preserve">
     <value>Add</value>
   </data>
   <data name="update.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="update.Text" xml:space="preserve">
     <value>Update</value>
   </data>
   <data name="delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="delete.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="view.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="view.Text" xml:space="preserve">
     <value>View</value>
   </data>
   <data name="exit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>130, 26</value>
   </data>
   <data name="exit.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>127, 6</value>
   </data>
   <data name="option.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -174,13 +174,13 @@
     <value>Option</value>
   </data>
   <data name="accountOption1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>133, 26</value>
   </data>
   <data name="accountOption1.Text" xml:space="preserve">
     <value>Normal</value>
   </data>
   <data name="accountOption2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>133, 26</value>
   </data>
   <data name="accountOption2.Text" xml:space="preserve">
     <value>Admin</value>
@@ -217,40 +217,64 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="dataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="dataGridView1.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="dataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 24</value>
   </data>
-  <data name="dataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>50, 50, 50, 50</value>
-  </data>
-  <data name="dataGridView.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1056, 512</value>
   </data>
-  <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
+  <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;dataGridView.Name" xml:space="preserve">
-    <value>dataGridView</value>
+  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+    <value>dataGridView1</value>
   </data>
-  <data name="&gt;&gt;dataGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelManagerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelManagerInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 24</value>
+  </data>
+  <data name="panelManagerInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1056, 512</value>
+  </data>
+  <data name="panelManagerInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panelManagerInfo.Name" xml:space="preserve">
+    <value>panelManagerInfo</value>
+  </data>
+  <data name="&gt;&gt;panelManagerInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelManagerInfo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelManagerInfo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>70</value>
+    <value>25</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1164, 560</value>
@@ -328,7 +352,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Form1</value>
+    <value>MainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

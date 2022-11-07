@@ -29,5 +29,26 @@ namespace Manager.model
         public ChiNhanh()
         {
         }
+
+        public override string ToString()
+        {
+            //return GetType().GetProperties()
+            //.Select(info => (info.Name, Value: info.GetValue(this, null) ?? "(null)"))
+            //.Aggregate(
+            //new StringBuilder(),
+            //(sb, pair) => sb.AppendLine($"{pair.Name}: {pair.Value}"),
+            //sb => sb.ToString());
+            return this.maChiNhanh;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

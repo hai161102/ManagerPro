@@ -24,7 +24,7 @@ namespace Manager.model.instance
             return instance;
         }
 
-        public void setAccount(CurrentAccount account)
+        public void setAccount(UserAccount account)
         {
             this.userAccount = account;
         }
