@@ -19,6 +19,7 @@ namespace Manager
         private string SIGN_UP = "Sign Up";
         private string NORMAL = "Normal";
         private string ADMIN = "Admin";
+        private string permission;
         private DatabasePresenter databasePresenter;
         private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>(); 
         private BindingSource bindingSource = new BindingSource();
@@ -56,25 +57,25 @@ namespace Manager
                 {
                     databasePresenter = new DatabasePresenter(this);
                     databasePresenter.getManagerDao().getManagerInformation(CurrentAccount.getInstance().getAccount().getNhanVien().Id);
+                    permission = CurrentAccount.getInstance().getAccount().getPermission();
                 }
-                switch (CurrentAccount.getInstance().getAccount().getPermission())
+                if (CurrentAccount.getInstance().getAccount().getPermission() == AccountManager.NORMAL_PERMISSION)
                 {
-                    case 1:
-                        setViewAdmin();
-                        break;
-                    case 2:
-                        setViewNormalUser();
-                        break;
-                    default:
-                        break;
+                    setViewNormalUser();
+
                 }
-                
+                else if (CurrentAccount.getInstance().getAccount().getPermission() == AccountManager.ADMIN_PERMISSION)
+                {
+                    setViewAdmin();
+
+                }
             }
         }
 
         private void setViewNormalUser()
         {
-
+            this.option.Enabled = false;
+            this.accountOption2.Enabled = false;
         }
 
         private void setViewAdmin()
@@ -179,7 +180,7 @@ namespace Manager
 
         private void toolStripMenuItem1_Click_2(object sender, EventArgs e)
         {
-
+            
         }
 
         private void accountToolStripMenuItem_Click(object sender, EventArgs e)

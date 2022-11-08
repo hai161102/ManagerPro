@@ -189,6 +189,7 @@ namespace Manager
             this.Controls.Add(this.panelManagerInfo);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Load += new System.EventHandler(this.Form1_Load_1);

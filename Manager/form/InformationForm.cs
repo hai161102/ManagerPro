@@ -52,11 +52,12 @@ namespace Manager.form
 
         private void btnChangePass_Click(object sender, EventArgs e)
         {
-            DoiMK_Form doiMK_Form = new DoiMK_Form();
-            doiMK_Form.Show();
+            ChangePasswordForm changePassword = new ChangePasswordForm();
+            changePassword.Show();
         }
         private void onLoad(object sender, EventArgs e)
         {
+
             infoManagerID.Text = nhanVien.Id.ToString();
             infoManagerName.Text = nhanVien.HoTen.ToString();
             infoManagerLevel.Text = nhanVien.ChucVu.ChucVuName;
@@ -67,6 +68,16 @@ namespace Manager.form
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void infoManagerID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void infoManagerLevel_Click(object sender, EventArgs e)
         {
 
         }

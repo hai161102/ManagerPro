@@ -8,13 +8,13 @@ namespace Manager.model
 {
     public class AccountManager
     {
-        public static int NORMAL_PERMISSION = 2;
-        public static int ADMIN_PERMISSION = 1;
+        public static string NORMAL_PERMISSION = "normal";
+        public static string ADMIN_PERMISSION = "admin";
         private string username;
         private string password;
-        private int permission = NORMAL_PERMISSION;
+        private string permission = NORMAL_PERMISSION;
 
-        public AccountManager(string username, string password, int permission)
+        public AccountManager(string username, string password, string permission)
         {
             this.username = username;
             this.password = password;
@@ -45,7 +45,7 @@ namespace Manager.model
             return this.password;
         }
 
-        public int getPermission()
+        public string getPermission()
         {
             return this.permission;
         }

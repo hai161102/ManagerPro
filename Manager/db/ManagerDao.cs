@@ -18,7 +18,6 @@ namespace Manager.db
         private SqlConnection connection;
         private IDatabaseModel iDatabaseModel;
         private ILoginModel iLoginModel;
-        private string connectionString = "Data Source=HAI;Initial Catalog=Manager_gr_12;Integrated Security=True";
         private string DATE_FORMAT = "yyyy-MM-dd";
 
         public void setIDatabaseModel(IDatabaseModel databaseModel)
@@ -37,10 +36,9 @@ namespace Manager.db
 
         private SqlConnection GetConnection()
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(Program.CONNECTION_STRING);
             if (connection.State == ConnectionState.Closed)
                 connection.Open();
-
             return connection;
         }
 
@@ -58,14 +56,16 @@ namespace Manager.db
             try
             {
                 connection = GetConnection();
-                string query = "insert into Manager values (N'" + nhanvien.HoTen
+                string query = "insert into NhanVien values (" 
+                    + "N'" + nhanvien.ChiNhanh.MaChiNhanh
+                    + "', N'" + nhanvien.HoTen
                     + "', N'" + nhanvien.SoDienThoai
+                    + "', N'" + nhanvien.ChucVu.MaChucVu
                     + "', '" + nhanvien.NgaySinh.ToString(DATE_FORMAT)
                     + "', N'" + nhanvien.GioiTinh
                     + "', N'" + nhanvien.QueQuan
-                    + "', N'" + nhanvien.ChiNhanh.MaChiNhanh
-                    + "', N'" + nhanvien.ChucVu.MaChucVu + "', " 
-                    + nhanvien.BacLuong.BacLuong + ")";
+                    + "', " + nhanvien.BacLuong.BacLuong
+                    + ")";
                 SqlCommand command = new SqlCommand(query, connection);
                 if (command.ExecuteNonQuery() < 0)
                 {
@@ -92,7 +92,7 @@ namespace Manager.db
             try
             {
                 connection = GetConnection();
-                string query = "Select * from Manager";
+                string query = "Select * from NhanVien";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 SqlDataReader oReader = cmd.ExecuteReader();
                 while (oReader.Read())
@@ -104,17 +104,17 @@ namespace Manager.db
                         ChucVu chucVu = new ChucVu();
                         Luong luong = new Luong();
 
-                        chinhanh.MaChiNhanh = oReader["stateId"].ToString();
-                        chucVu.MaChucVu = oReader["levelId"].ToString();
-                        luong.BacLuong = Int32.Parse(oReader["salaryId"].ToString());
+                        chinhanh.MaChiNhanh = oReader["MaChiNhanh"].ToString();
+                        chucVu.MaChucVu = oReader["MaChucVu"].ToString();
+                        luong.BacLuong = Int32.Parse(oReader["BacLuong"].ToString());
 
                         list.Add(new NhanVien(
-                        Int32.Parse(oReader["managerId"].ToString()),
-                        oReader["managerName"].ToString(),
-                        oReader["managerNumber"].ToString(),
-                        DateTime.Parse(oReader["managerDob"].ToString()),
-                        oReader["managerSex"].ToString(),
-                        oReader["managerHometown"].ToString(),
+                        Int32.Parse(oReader["MaNhanVien"].ToString()),
+                        oReader["HoTen"].ToString(),
+                        oReader["SoDienThoai"].ToString(),
+                        DateTime.Parse(oReader["NgaySinh"].ToString()),
+                        oReader["GioiTinh"].ToString(),
+                        oReader["QueQuan"].ToString(),
                         chinhanh,
                         chucVu,
                         luong)
@@ -138,12 +138,42 @@ namespace Manager.db
             }
             list.ForEach(o =>
             {
-                o.ChiNhanh = getChiNhanh("Select * from StateCompany where stateId = '" + o.ChiNhanh.MaChiNhanh + "'");
-                o.ChucVu = getChucVu("Select * from LevelManager where levelId = '" + o.ChucVu.MaChucVu + "'");
-                o.BacLuong = getLuong("Select * from Salary where salaryId = " + o.BacLuong.BacLuong);
+                o.ChiNhanh = getChiNhanh("Select * from ChiNhanh where MaChiNhanh = '" + o.ChiNhanh.MaChiNhanh + "'");
+                o.ChucVu = getChucVu("Select * from ChucVu where MaChucVu = '" + o.ChucVu.MaChucVu + "'");
+                o.BacLuong = getLuong("Select * from Luong where BacLuong = " + o.BacLuong.BacLuong);
             });
             iDatabaseModel.onSuccess(list);
 
+        }
+
+        public void changePassword(object acc, string newPass)
+        {
+            UserAccount user = acc as UserAccount;
+            if (user != null)
+            {
+                try
+                {
+                    connection = GetConnection();
+                    string query = "update AccountManager set passwordManager = '" + newPass + "' where usernameManager = '" + user.getUserName() + "';";
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    if (cmd.ExecuteNonQuery() < 0)
+                    {
+                        iDatabaseModel.onFailure("Some error!");
+                    }
+                    else
+                    {
+                        string updateSuccess = "updateSuccess";
+                        iDatabaseModel.onSuccess(updateSuccess);
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    iDatabaseModel.onFailure(e.Message);
+                }
+                
+            }
         }
         public void getManagerInformation(int id)
         {
@@ -151,7 +181,7 @@ namespace Manager.db
             try
             {
                 connection = GetConnection();
-                string query = "Select * from Manager where managerId = " + id;
+                string query = "Select * from NhanVien where MaNhanVien = " + id;
                 SqlCommand cmd = new SqlCommand(query, connection);
                 SqlDataReader oReader = cmd.ExecuteReader();
                 while (oReader.Read())
@@ -163,17 +193,17 @@ namespace Manager.db
                         ChucVu chucVu = new ChucVu();
                         Luong luong = new Luong();
 
-                        chinhanh.MaChiNhanh = oReader["stateId"].ToString();
-                        chucVu.MaChucVu = oReader["levelId"].ToString();
-                        luong.BacLuong = Int32.Parse(oReader["salaryId"].ToString());
+                        chinhanh.MaChiNhanh = oReader["MaChiNhanh"].ToString();
+                        chucVu.MaChucVu = oReader["MaChucVu"].ToString();
+                        luong.BacLuong = Int32.Parse(oReader["BacLuong"].ToString());
 
                         nhanVien =new NhanVien(
-                        Int32.Parse(oReader["managerId"].ToString()),
-                        oReader["managerName"].ToString(),
-                        oReader["managerNumber"].ToString(),
-                        DateTime.Parse(oReader["managerDob"].ToString()),
-                        oReader["managerSex"].ToString(),
-                        oReader["managerHometown"].ToString(),
+                        Int32.Parse(oReader["MaNhanVien"].ToString()),
+                        oReader["HoTen"].ToString(),
+                        oReader["SoDienThoai"].ToString(),
+                        DateTime.Parse(oReader["NgaySinh"].ToString()),
+                        oReader["GioiTinh"].ToString(),
+                        oReader["QueQuan"].ToString(),
                         chinhanh,
                         chucVu,
                         luong);
@@ -193,9 +223,9 @@ namespace Manager.db
             {
                 iDatabaseModel.onFailure(e.Message);
             }
-            nhanVien.ChiNhanh = getChiNhanh("Select * from StateCompany where stateId = '" + nhanVien.ChiNhanh.MaChiNhanh + "'");
-            nhanVien.ChucVu = getChucVu("Select * from LevelManager where levelId = '" + nhanVien.ChucVu.MaChucVu + "'");
-            nhanVien.BacLuong = getLuong("Select * from Salary where salaryId = " + nhanVien.BacLuong.BacLuong);
+            nhanVien.ChiNhanh = getChiNhanh("Select * from ChiNhanh where MaChiNhanh = '" + nhanVien.ChiNhanh.MaChiNhanh + "'");
+            nhanVien.ChucVu = getChucVu("Select * from ChucVu where MaChucVu = '" + nhanVien.ChucVu.MaChucVu + "'");
+            nhanVien.BacLuong = getLuong("Select * from Luong where BacLuong = " + nhanVien.BacLuong.BacLuong);
 
             iDatabaseModel.onSuccess(nhanVien);
         }
@@ -206,7 +236,7 @@ namespace Manager.db
             try
             {
                 connection = GetConnection();
-                string query = "Select * from Manager where managerId = " + id;
+                string query = "Select * from NhanVien where MaNhanVien = " + id;
                 SqlCommand cmd = new SqlCommand(query, connection);
                 SqlDataReader oReader = cmd.ExecuteReader();
                 while (oReader.Read())
@@ -218,17 +248,17 @@ namespace Manager.db
                         ChucVu chucVu = new ChucVu();
                         Luong luong = new Luong();
 
-                        chinhanh.MaChiNhanh = oReader["stateId"].ToString();
-                        chucVu.MaChucVu = oReader["levelId"].ToString();
-                        luong.BacLuong = Int32.Parse(oReader["salaryId"].ToString());
+                        chinhanh.MaChiNhanh = oReader["MaChiNhanh"].ToString();
+                        chucVu.MaChucVu = oReader["MaChucVu"].ToString();
+                        luong.BacLuong = Int32.Parse(oReader["BacLuong"].ToString());
 
                         nhanVien = new NhanVien(
-                        Int32.Parse(oReader["managerId"].ToString()),
-                        oReader["managerName"].ToString(),
-                        oReader["managerNumber"].ToString(),
-                        DateTime.Parse(oReader["managerDob"].ToString()),
-                        oReader["managerSex"].ToString(),
-                        oReader["managerHometown"].ToString(),
+                        Int32.Parse(oReader["MaNhanVien"].ToString()),
+                        oReader["HoTen"].ToString(),
+                        oReader["SoDienThoai"].ToString(),
+                        DateTime.Parse(oReader["NgaySinh"].ToString()),
+                        oReader["GioiTinh"].ToString(),
+                        oReader["QueQuan"].ToString(),
                         chinhanh,
                         chucVu,
                         luong);
@@ -240,16 +270,16 @@ namespace Manager.db
 
                 }
                 cmd.Dispose();
-                connection.Close();
 
+                connection.Close();
             }
             catch (Exception e)
             {
             }
+            nhanVien.ChiNhanh = getChiNhanh("Select * from ChiNhanh where MaChiNhanh = '" + nhanVien.ChiNhanh.MaChiNhanh + "'");
+            nhanVien.ChucVu = getChucVu("Select * from ChucVu where MaChucVu = '" + nhanVien.ChucVu.MaChucVu + "'");
+            nhanVien.BacLuong = getLuong("Select * from Luong where BacLuong = " + nhanVien.BacLuong.BacLuong);
 
-            nhanVien.ChiNhanh = getChiNhanh("Select * from StateCompany where stateId = '" + nhanVien.ChiNhanh.MaChiNhanh + "'");
-            nhanVien.ChucVu = getChucVu("Select * from LevelManager where levelId = '" + nhanVien.ChucVu.MaChucVu + "'");
-            nhanVien.BacLuong = getLuong("Select * from Salary where salaryId = " + nhanVien.BacLuong.BacLuong);
             return nhanVien;
         }
 
@@ -263,7 +293,7 @@ namespace Manager.db
                 try
                 {
                     connection = GetConnection();
-                    string query = "Select * from Account where username = '" + account.getUserName() + "' and pass = '"
+                    string query = "Select * from AccountManager where usernameManager = '" + account.getUserName() + "' and passwordManager = '"
                         + account.getPassword() + "'";
                     SqlCommand cmd = new SqlCommand(query, connection);
                     SqlDataReader oReader = cmd.ExecuteReader();
@@ -274,9 +304,9 @@ namespace Manager.db
                             NhanVien nhanVien = new NhanVien();
                             nhanVien.Id = Int32.Parse(oReader["managerId"].ToString());
                             userAccount = new UserAccount(
-                                    oReader["username"].ToString(),
-                                    oReader["pass"].ToString(),
-                                    Int32.Parse(oReader["permission"].ToString()),
+                                    oReader["usernameManager"].ToString(),
+                                    oReader["passwordManager"].ToString(),
+                                    oReader["permission"].ToString(),
                                     nhanVien
                                 );
 
@@ -290,15 +320,11 @@ namespace Manager.db
                     connection.Close();
                     iLoginModel.onLoginSuccess(userAccount);
 
-
                 }
                 catch (Exception e)
                 {
-
                     iLoginModel.onLoginFailure(e.Message);
                 }
-
-
             }
         }
 
@@ -314,10 +340,10 @@ namespace Manager.db
                 try
                 {
                     luong = new Luong(
-                            Int32.Parse(oReader["salaryId"].ToString()),
-                            float.Parse(oReader["baseSalary"].ToString()),
-                            float.Parse(oReader["indexSalary"].ToString()),
-                            float.Parse(oReader["bonusSalary"].ToString())
+                            Int32.Parse(oReader["BacLuong"].ToString()),
+                            float.Parse(oReader["LuongCoBan"].ToString()),
+                            float.Parse(oReader["Hesoluong"].ToString()),
+                            float.Parse(oReader["PhuCap"].ToString())
                         );
                 }
                 catch (Exception e)
@@ -343,8 +369,8 @@ namespace Manager.db
                 try
                 {
                     chuc = new ChucVu(
-                            oReader["levelId"].ToString(),
-                            oReader["levelName"].ToString()
+                            oReader["MaChucVu"].ToString(),
+                            oReader["TenChucVu"].ToString()
                             );
                 }
                 catch (Exception e)
@@ -369,10 +395,10 @@ namespace Manager.db
                 try
                 {
                     chiNhanh = new ChiNhanh(
-                            oReader["stateId"].ToString(),
-                            oReader["stateName"].ToString(),
-                            oReader["stateAddress"].ToString(),
-                            oReader["stateHotline"].ToString()
+                            oReader["MaChiNhanh"].ToString(),
+                            oReader["TenChiNhanh"].ToString(),
+                            oReader["DiaChi"].ToString(),
+                            oReader["Hoiline"].ToString()
                         );
                 }
                 catch (Exception e)

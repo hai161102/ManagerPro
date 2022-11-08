@@ -78,5 +78,20 @@ namespace Manager.form
         public void onLoginFailure(string message)
         {
         }
+
+        private void tbPass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

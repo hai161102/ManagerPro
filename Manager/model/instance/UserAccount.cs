@@ -13,7 +13,7 @@ namespace Manager.model.instance
         {
         }
 
-        public UserAccount(string username, string password, int permission, NhanVien nhanVien) : base(username, password, permission)
+        public UserAccount(string username, string password, string permission, NhanVien nhanVien) : base(username, password, permission)
         {
             this.nhanVien = nhanVien;
         }

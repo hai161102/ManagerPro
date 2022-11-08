@@ -167,7 +167,7 @@
   <data name="pictureBox1.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        6AAAAOgBhtX2rwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAARpSURBVFhHtZZd
+        5wAAAOcB8BtYtQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAARpSURBVFhHtZZd
         UJRVGMffIALjo0FAsBAJVpRAQCATUdQ0GmOgmUYYnaYusq/J6aaLusuRGUdnaianGxSu6i5LUjSKBBdc
         F5YFEXDZMUCRJatlGcIRZoDmPP+es/vix3Jg3wifmd+cs8///zxn3/OePbOa4fAgMvguDgRNiJrgCbIH
         TdAoM6szyrl21qrZs1969aplCA9Wh4yLqpBxmmJgkKmQv0VN6F2Y9C5LiBGsCPOIytAxmmSwRGbDxsRx
@@ -201,7 +201,7 @@
   <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        dAAAAHQBMYXlgQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEiSURBVDhPhdK9
+        cwAAAHMBY8FD/gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEiSURBVDhPhdK9
         SgNBFIbhbU0R7YSk1QvQwnvwBiSXoYVpYxGUWKhtUBPBQiwsYhNBe0GttEqKNIpoJWqhYPx5v+yZZRZm
         zAcPc/bM2WGzmySQKezgAb/mHtuYxL/RwB0esYpFU7XeLYqIpoEnTI+u8lHvGRujq0j6qKVlMGvopWU4
         r6ikZTDa00w0b1hKy2C0p5lgZqE3f4pmRAf6IjPIpQC9ZffZZIAjo9rf0+wEsszDHzjBBX7MufX8mTlk
@@ -213,7 +213,7 @@
   <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        dAAAAHQBMYXlgQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADCSURBVDhPtY8x
+        cwAAAHMBY8FD/gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADCSURBVDhPtY8x
         DgFBFIa3oRSNRqgUOq7AkUSCI1CLO4gI7mAvIOEMQqKg0PL9+6bZNcaG+JIv+eftzHtvo39RxyXenCts
         Yi70+IgDrDqHrlbDj2iyHmRRbWExjFbW1CyqXS2G+bmB1vT9wgjnFsM08I5qoqlSWTV9C1LBGNeoTS5O
         5Q1uUXfeoktji14mqOZeurjHQnLyU8QDdpJThhn2LAbp49Rimh22LAZpo+6+cMaSxSBlPFlMowaPnHob

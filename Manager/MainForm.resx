@@ -126,70 +126,70 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 26</value>
+    <value>134, 26</value>
   </data>
   <data name="search.Text" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="add.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 26</value>
+    <value>134, 26</value>
   </data>
   <data name="add.Text" xml:space="preserve">
     <value>Add</value>
   </data>
   <data name="update.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 26</value>
+    <value>134, 26</value>
   </data>
   <data name="update.Text" xml:space="preserve">
     <value>Update</value>
   </data>
   <data name="delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 26</value>
+    <value>134, 26</value>
   </data>
   <data name="delete.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="view.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 26</value>
+    <value>134, 26</value>
   </data>
   <data name="view.Text" xml:space="preserve">
     <value>View</value>
   </data>
   <data name="exit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 26</value>
+    <value>134, 26</value>
   </data>
   <data name="exit.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 6</value>
+    <value>131, 6</value>
   </data>
   <data name="option.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
+    <value>Segoe UI Semibold, 12pt, style=Bold</value>
   </data>
   <data name="option.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 25</value>
+    <value>113, 25</value>
   </data>
   <data name="option.Text" xml:space="preserve">
     <value>Option</value>
   </data>
   <data name="accountOption1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 26</value>
+    <value>134, 26</value>
   </data>
   <data name="accountOption1.Text" xml:space="preserve">
     <value>Normal</value>
   </data>
   <data name="accountOption2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 26</value>
+    <value>134, 26</value>
   </data>
   <data name="accountOption2.Text" xml:space="preserve">
     <value>Admin</value>
   </data>
   <data name="account.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
+    <value>Segoe UI Semibold, 12pt, style=Bold</value>
   </data>
   <data name="account.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 25</value>
+    <value>113, 25</value>
   </data>
   <data name="account.Text" xml:space="preserve">
     <value>Account</value>
@@ -198,7 +198,7 @@
     <value>0, 24</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 512</value>
+    <value>126, 512</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
@@ -226,10 +226,10 @@
     <value>Fill</value>
   </data>
   <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 24</value>
+    <value>126, 24</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1056, 512</value>
+    <value>1014, 512</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -250,10 +250,10 @@
     <value>Fill</value>
   </data>
   <data name="panelManagerInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 24</value>
+    <value>126, 24</value>
   </data>
   <data name="panelManagerInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1056, 512</value>
+    <value>1014, 512</value>
   </data>
   <data name="panelManagerInfo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

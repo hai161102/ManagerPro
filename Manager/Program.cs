@@ -18,7 +18,7 @@ namespace Manager
         /// The main entry point for the application.
         /// </summary>
         /// 
-        public static List<NhanVien> listNhanVien;
+        public static string CONNECTION_STRING = @"Data Source=HAI;Initial Catalog=Nhom_12;Integrated Security=True";
         [STAThread]
         static void Main()
         {

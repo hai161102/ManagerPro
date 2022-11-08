@@ -55,6 +55,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(64, 64);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox2
             // 
@@ -77,23 +78,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(276, 74);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // tbPass
             // 
             this.tbPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPass.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPass.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPass.Location = new System.Drawing.Point(25, 43);
             this.tbPass.Name = "tbPass";
-            this.tbPass.Size = new System.Drawing.Size(248, 16);
+            this.tbPass.Size = new System.Drawing.Size(248, 15);
             this.tbPass.TabIndex = 3;
+            this.tbPass.TextChanged += new System.EventHandler(this.tbPass_TextChanged);
             // 
             // tbUserName
             // 
             this.tbUserName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbUserName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUserName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbUserName.Location = new System.Drawing.Point(25, 13);
             this.tbUserName.Name = "tbUserName";
-            this.tbUserName.Size = new System.Drawing.Size(248, 16);
+            this.tbUserName.Size = new System.Drawing.Size(248, 15);
             this.tbUserName.TabIndex = 2;
             this.tbUserName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 

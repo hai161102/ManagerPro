@@ -106,11 +106,11 @@
     <Compile Include="form\dialog\WarmingType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\SignUpForm.cs">
+    <Compile Include="form\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\SignUpForm.Designer.cs">
-      <DependentUpon>SignUpForm.cs</DependentUpon>
+    <Compile Include="form\ChangePasswordForm.Designer.cs">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </Compile>
     <Compile Include="interfaces\LoginListener.cs" />
     <Compile Include="interfaces\OnClickListener.cs" />
@@ -144,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\LoginFrom.resx">
       <DependentUpon>LoginFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\ChangePasswordForm.resx">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\TinhLuongForm.resx">
       <DependentUpon>TinhLuongForm.cs</DependentUpon>
@@ -218,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="account.txt" />
+    <None Include="Resources\close1.png" />
     <None Include="Resources\account.txt" />
   </ItemGroup>
   <ItemGroup>
