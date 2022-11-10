@@ -118,5 +118,10 @@ namespace Manager.form
             }
             else warnning.Visible = false;
         }
+
+        public void onResultSuccess(object data, string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

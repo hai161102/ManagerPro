@@ -1,4 +1,5 @@
-﻿using Manager.model;
+﻿using Manager.interfaces;
+using Manager.model;
 using Manager.model.instance;
 using Manager.presenter;
 using Manager.view.interfaces;
@@ -19,6 +20,7 @@ namespace Manager.form
     {
         LoginPresenter databasePresenter;
         private AccountManager account;
+        private LoginListener loginListener;
 
         public LoginFrom()
         {
@@ -26,6 +28,13 @@ namespace Manager.form
             databasePresenter = new LoginPresenter(this);
         }
 
+        public LoginFrom(LoginListener loginListener)
+        {
+            this.loginListener = loginListener;
+            InitializeComponent();
+           
+            databasePresenter = new LoginPresenter(this);
+        }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -66,13 +75,14 @@ namespace Manager.form
         public void onLoginSuccess(object data)
         {
             CurrentAccount.getInstance().setAccount((UserAccount)data);
-            MainForm main = new MainForm();
-            main.Show();
             if (remember.Checked)
             {
                 Const.saveData(account);
             }
-            this.Close();
+            if (loginListener != null)
+            {
+                loginListener.loginSuccess();
+            }
         }
 
         public void onLoginFailure(string message)

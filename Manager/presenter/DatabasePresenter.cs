@@ -57,5 +57,10 @@ namespace Manager.presenter
         {
             return model.search(obj, tag);
         }
+
+        public void onSuccess(object data, string key)
+        {
+            dataView.onResultSuccess(data, key);
+        }
     }
 }

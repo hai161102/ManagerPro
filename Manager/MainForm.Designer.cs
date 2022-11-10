@@ -50,6 +50,7 @@ namespace Manager
             this.account = new System.Windows.Forms.ToolStripMenuItem();
             this.accountOption1 = new System.Windows.Forms.ToolStripMenuItem();
             this.accountOption2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelManagerInfo = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
@@ -123,7 +124,8 @@ namespace Manager
             // 
             this.account.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.accountOption1,
-            this.accountOption2});
+            this.accountOption2,
+            this.logOutToolStripMenuItem});
             resources.ApplyResources(this.account, "account");
             this.account.Margin = new System.Windows.Forms.Padding(0, 16, 0, 0);
             this.account.Name = "account";
@@ -140,6 +142,12 @@ namespace Manager
             this.accountOption2.Name = "accountOption2";
             resources.ApplyResources(this.accountOption2, "accountOption2");
             this.accountOption2.Click += new System.EventHandler(this.accountOption2_Click);
+            // 
+            // logOutToolStripMenuItem
+            // 
+            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            resources.ApplyResources(this.logOutToolStripMenuItem, "logOutToolStripMenuItem");
+            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -177,6 +185,7 @@ namespace Manager
             this.dataGridView1.RowTemplate.ReadOnly = true;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.StandardTab = true;
+            this.dataGridView1.RowDividerDoubleClick += new System.Windows.Forms.DataGridViewRowDividerDoubleClickEventHandler(this.rowClick);
             // 
             // panelManagerInfo
             // 
@@ -230,6 +239,7 @@ namespace Manager
         private ToolStripMenuItem accountOption2;
         private DataGridView dataGridView1;
         private Panel panelManagerInfo;
+        private ToolStripMenuItem logOutToolStripMenuItem;
     }
 }
 

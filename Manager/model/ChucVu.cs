@@ -32,7 +32,7 @@ namespace Manager.model
             //new StringBuilder(),
             //(sb, pair) => sb.AppendLine($"{pair.Name}: {pair.Value}"),
             //sb => sb.ToString());
-            return this.maChucVu;
+            return this.chucVuName;
         }
 
         public override bool Equals(object obj)

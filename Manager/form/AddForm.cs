@@ -1,22 +1,29 @@
 ﻿using Manager.interfaces;
 using Manager.model;
+using Manager.model.instance;
+using Manager.presenter;
+using Manager.view.interfaces;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Manager.form
 {
-    public partial class AddForm : Form
+    public partial class AddForm : Form, IDataView
     {
         private OnViewControlListener onViewControlListener;
+        private ChiNhanh chiNhanh;
+        private ChucVu chuc;
+        private Luong luong;
+        private DatabasePresenter databasePresenter;
+        private List<ChiNhanh> chiNhanhs = new List<ChiNhanh>();
+        private List<Luong> luongList = new List<Luong>();
+        private List<ChucVu> chucVuList = new List<ChucVu>();
+        private NhanVien nhanvien;
+
         public AddForm(OnViewControlListener viewControlListener)
         {
+            databasePresenter = new DatabasePresenter(this);
             this.onViewControlListener = viewControlListener;
             InitializeComponent();
         }
@@ -28,7 +35,21 @@ namespace Manager.form
 
         private void AddForm_Load(object sender, EventArgs e)
         {
+            databasePresenter.getManagerDao().getListChiNhanh();
+            databasePresenter.getManagerDao().getListChucVu();
+            databasePresenter.getManagerDao().getListLuong();
+            userGenerate.Text = "";
+            passGenerate.Text = "";
+            setViewComboPermission();
+            
+        }
 
+        private void setViewComboPermission()
+        {
+            permissionGenerate.Items.Add(Permission.MANAGER);
+            permissionGenerate.Items.Add(Permission.COMPANY_BRANCH);
+            permissionGenerate.Items.Add(Permission.COMPANY);
+            permissionGenerate.SelectedIndex = 0;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -50,37 +71,148 @@ namespace Manager.form
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string sex = (maleRadio.Checked) ? "Nam" : "Nu";
-            ChiNhanh chiNhanh = new ChiNhanh();
-            chiNhanh.MaChiNhanh = tbMaChiNhanh.Text.Trim();
-            ChucVu chuc = new ChucVu();
-            chuc.MaChucVu = tbLevel.Text.Trim();
-            Luong luong = new Luong();
-            luong.BacLuong = Int32.Parse(tbBacluong.Text);
-            NhanVien nhanvien = new NhanVien(
-                    -1,
-                    tbName.Text.Trim(),
-                    tbNumber.Text.Trim(),
-                    dateOfBirth.Value,
-                    sex,
-                    tbHometown.Text.Trim(),
-                    chiNhanh,
-                    chuc,
-                    luong
-                );
-            onViewControlListener.onAgree(new object[] { nhanvien });
-            Close();
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            onViewControlListener.onCancel();
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             onViewControlListener.onCancel();
+        }
+
+        private void tbNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbLevel_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbBranch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            if (addButton.Text == "OK")
+            {
+                onViewControlListener.onAgree(new NhanVien[] {nhanvien});
+                return;
+            }
+            if (isFullFeil() )
+            {
+
+                string sex = (maleRadio.Checked) ? "Nam" : "Nữ";
+                chiNhanh = new ChiNhanh();
+                chiNhanh.MaChiNhanh = chiNhanhs[cbBranch.SelectedIndex].MaChiNhanh;
+
+                chuc = new ChucVu();
+                chuc.MaChucVu = chucVuList[cbPosition.SelectedIndex].MaChucVu;
+
+                
+                luong = new Luong();
+                luong.BacLuong = luongList[cbSalaryLevel.SelectedIndex].BacLuong;
+
+
+                nhanvien = new NhanVien(
+                        -1,
+                        tbName.Text.Trim(),
+                        tbNumber.Text.Trim(),
+                        dateOfBirth.Value,
+                        sex,
+                        tbHometown.Text.Trim(),
+                        chiNhanh,
+                        chuc,
+                        luong
+                    );
+                databasePresenter.addMember(nhanvien);
+                addButton.Enabled = false;
+            }
+            
+        }
+
+        private bool isFullFeil()
+        {
+            return (maleRadio.Checked || femaleRadio.Checked)
+                && tbName.Text != ""
+                && tbNumber.Text != ""
+                && tbHometown.Text != ""
+                ;
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            tbName.Clear();
+            tbNumber.Clear();
+            tbHometown.Clear();
+            
+        }
+
+        public void onResultSuccess(object data)
+        {
+        }
+
+        public void onResultError(string message)
+        {
+            MessageBox.Show(message);
+        }
+
+        public void onResultSuccess(object data, string key)
+        {
+            
+            if (key == "all_chi_nhanh")
+            {
+                chiNhanhs.AddRange((IEnumerable<ChiNhanh>)data);
+                cbBranch.Items.Clear();
+                cbBranch.Items.AddRange(chiNhanhs.ToArray());
+                cbBranch.SelectedIndex = 0;
+            }
+            else if (key == "all_chuc_vu")
+            {
+                chucVuList.AddRange((IEnumerable<ChucVu>)data);
+                cbPosition.Items.Clear();
+                cbPosition.Items.AddRange(chucVuList.ToArray());
+                cbPosition.SelectedIndex = 0;
+
+            }
+            else if (key == "all_luong")
+            {
+                luongList.AddRange((IEnumerable<Luong>)data);
+                cbSalaryLevel.Items.Clear();
+                cbSalaryLevel.Items.AddRange(luongList.ToArray());
+                cbSalaryLevel.SelectedIndex = 0;
+            }
+            else if (key == "insert_success")
+            {
+                NhanVien nhan = data as NhanVien;
+                if (nhan != null)
+                {
+
+                    userGenerate.Text = $"manager{nhan.Id}";
+                    passGenerate.Text = userGenerate.Text;
+                    UserAccount user = new UserAccount(userGenerate.Text, passGenerate.Text, permissionGenerate.SelectedText, nhan);
+                    databasePresenter.getManagerDao().createAccount(user);
+                }
+            }
+            else if (key == "add_account_done")
+            {
+
+                addButton.Enabled = true;
+                addButton.Text = "OK";
+            }
+
         }
     }
 }

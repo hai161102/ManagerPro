@@ -1,4 +1,5 @@
 ﻿using Manager.form;
+using Manager.form.dialog;
 using Manager.interfaces;
 using Manager.model;
 using Manager.model.instance;
@@ -8,8 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using static Manager.form.SearchForm;
 
 namespace Manager
 {
@@ -23,12 +26,18 @@ namespace Manager
         private DatabasePresenter databasePresenter;
         private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>(); 
         private BindingSource bindingSource = new BindingSource();
+        private SearchForm searchForm;
+        private static List<NhanVien> nhanViens;
+        private Point clickPoint;
+        private static OptionRightClickDialog dialog;
 
         public MainForm()
         {
             InitializeComponent();
             
         }
+
+
         //{
         //    loginForm = new LoginForm(this);
         //    loginForm.onCloseClick = new AfterCLoseView(this);
@@ -38,6 +47,8 @@ namespace Manager
         private void setViewNormal()
         {
             this.Enabled = true;
+            dataGridView1.CellDoubleClick += DataGridView1_CellClick;
+            dataGridView1.CellMouseClick += DataGridView1_CellMouseDown;
             if (CurrentAccount.getInstance().getAccount() == null)
             {
                 this.accountOption1.Text = LOGIN;
@@ -59,16 +70,59 @@ namespace Manager
                     databasePresenter.getManagerDao().getManagerInformation(CurrentAccount.getInstance().getAccount().getNhanVien().Id);
                     permission = CurrentAccount.getInstance().getAccount().getPermission();
                 }
-                if (CurrentAccount.getInstance().getAccount().getPermission() == AccountManager.NORMAL_PERMISSION)
+                if (CurrentAccount.getInstance().getAccount().getPermission() == Permission.MANAGER)
                 {
                     setViewNormalUser();
 
                 }
-                else if (CurrentAccount.getInstance().getAccount().getPermission() == AccountManager.ADMIN_PERMISSION)
+                else if (CurrentAccount.getInstance().getAccount().getPermission() == Permission.COMPANY)
                 {
                     setViewAdmin();
 
                 }
+            }
+        }
+
+        private void DataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                clickPoint = new Point();
+                clickPoint.X = MousePosition.X;
+                clickPoint.Y = MousePosition.Y;
+                dialog = new OptionRightClickDialog(clickPoint, new OnDialogClick(this));
+                dialog.Show();
+            }
+        }
+
+        private class OnDialogClick : OptionRightClickDialog.OnOptionClick
+        {
+            private MainForm mainForm;
+
+            public OnDialogClick(MainForm mainForm)
+            {
+                this.mainForm = mainForm;
+            }
+
+            public void onDelete()
+            {
+            }
+
+            public void onUpdate()
+            {
+            }
+        }
+        private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            NhanVien nhan = nhanViens[e.RowIndex];
+            if (nhan == null) return;
+            try
+            {
+                setViewInformation(nhan);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -98,42 +152,7 @@ namespace Manager
             }
         }
 
-        private void searchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void addMemberToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateMemberToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void deletMemberToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void toolStripComboBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public static PropertyInfo[] GetAuthors<T>()
+                public static PropertyInfo[] GetAuthors<T>()
         {
             PropertyInfo[] props = typeof(T).GetProperties();
             return props;
@@ -150,18 +169,13 @@ namespace Manager
             try
             {
                 NhanVien nhanVien = (NhanVien)data;
-                InformationForm informationForm = new InformationForm(nhanVien);
-                informationForm.TopLevel = false;
-                informationForm.AutoScroll = true;
-                panelManagerInfo.Controls.Add(informationForm);
-                dataGridView1.Visible = false;
-                informationForm.Show();
+                setViewInformation(nhanVien);
             }
             catch (Exception e)
             {
                 try
                 {
-                    List<NhanVien> nhanViens = (List<NhanVien>)data;
+                    nhanViens = (List<NhanVien>)data;
                     setDataSource(nhanViens);
                 }
                 catch (Exception ex)
@@ -171,6 +185,18 @@ namespace Manager
                 
             }
             
+        }
+
+        private void setViewInformation(NhanVien nhanVien)
+        {
+            InformationForm informationForm = new InformationForm(nhanVien);
+            informationForm.TopLevel = false;
+            informationForm.AutoScroll = true;
+            panelManagerInfo.Controls.Clear();
+            panelManagerInfo.Controls.Add(informationForm);
+            dataGridView1.Visible = false;
+            panelManagerInfo.Visible = true;
+            informationForm.Show();
         }
 
         public void onResultError(string message)
@@ -196,6 +222,12 @@ namespace Manager
         private void add_Click(object sender, EventArgs e)
         {
             AddForm add = new AddForm(new ViewControlAddForm(this));
+            add.TopLevel = false;
+            add.AutoScroll = true;
+            panelManagerInfo.Controls.Clear();
+            panelManagerInfo.Controls.Add(add);
+            dataGridView1.Visible = false;
+            panelManagerInfo.Visible = true;
             add.Show();
         }
         private void update_Click(object sender, EventArgs e)
@@ -210,12 +242,12 @@ namespace Manager
 
         private void view_Click(object sender, EventArgs e)
         {
-
+            setViewInformation(CurrentAccount.getInstance().getAccount().getNhanVien());
         }
 
         private void exit_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void Form1_Load_1(object sender, EventArgs e)
@@ -236,10 +268,20 @@ namespace Manager
                     ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(item.Name);
                     toolStripMenuItem.Name = item.Name;
                     toolStripMenuItem.DropDownItems.AddRange(getListMenu(item.PropertyType).ToArray());
+                    toolStripMenuItem.Click += onMenuStripClick;
                     listMenu.Add(toolStripMenuItem);
                 }
             }
             return listMenu;
+        }
+
+        private void onMenuStripClick(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStripMenuItem = sender as ToolStripMenuItem;
+            if (toolStripMenuItem.DropDownItems.Count <= 0)
+            {
+                searchByProperty(toolStripMenuItem.Name);
+            }
         }
 
 
@@ -351,13 +393,160 @@ namespace Manager
 
             public void onAgree(object[] datas)
             {
-                form.databasePresenter.addMember(datas[0]);
+                form.setViewInformation((NhanVien)datas[0]);
             }
 
             public void onCancel()
             {
                 
             }
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void searchByProperty(string propertyName)
+        {
+            List<NhanVien> list = new List<NhanVien>();
+            SearchListen searchListen = new SearchListen(list, propertyName, this);
+            searchForm = new SearchForm(searchListen);
+            searchForm.Show();
+        }
+
+        private class SearchListen : SearchListener
+        {
+            private List<NhanVien> lSearch;
+            private string propertySearch;
+            private MainForm form;
+
+            public SearchListen(List<NhanVien> search, string property, MainForm form)
+            {
+                this.lSearch = search;
+                this.propertySearch = property;
+                this.form = form;
+            }
+
+            public void onSearchClick(string text)
+            {
+                search(text);
+            }
+
+            public void onTextChange(string text)
+            {
+                search(text);
+            }
+
+            private void search(string text)
+            {
+                lSearch.Clear();
+                nhanViens.ForEach(n => {
+                    try
+                    {
+                        PropertyInfo property = null;
+                        object value = null;
+                        PropertyInfo[] propertyInfos = n.GetType().GetProperties();
+                        if (n.GetType().GetProperty(propertySearch) != null)
+                        {
+                            property = n.GetType().GetProperty(propertySearch);
+                            value = n;
+                        }
+                        else
+                        {
+                            foreach (PropertyInfo item in propertyInfos)
+                            {
+                                if (item.GetType().GetProperty(propertySearch) != null)
+                                {
+                                    property = item.GetType().GetProperty(propertySearch);
+                                    value = property.GetValue(item.GetValue(n, null), null);
+                                    
+                                    break;
+                                }
+                                
+                                
+                            }
+
+                        }
+
+                        string data = property.GetValue(value, null).ToString().ToLowerInvariant();
+                        data = RemoveSign4VietnameseString(data);
+                        if (data.Contains(text.ToLowerInvariant()))
+                        {
+                            lSearch.Add(n);
+                        }
+                    }
+                    catch (Exception exc)
+                    {
+
+                    }
+                });
+                form.setDataSource(lSearch);
+            }
+
+            public List<NhanVien> getList()
+            {
+                return this.lSearch;
+            }
+
+            public void onCancel()
+            {
+                form.setDataSource(nhanViens);
+            }
+
+            private string RemoveSign4VietnameseString(string str)
+            {
+                for (int i = 1; i < VietnameseSigns.Length; i++)
+                {
+                    for (int j = 0; j < VietnameseSigns[i].Length; j++)
+                        str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+                }
+                return str;
+            }
+            private readonly string[] VietnameseSigns = new string[]
+            {
+
+                "aAeEoOuUiIdDyY",
+
+                "áàạảãâấầậẩẫăắằặẳẵ",
+
+                "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+
+                "éèẹẻẽêếềệểễ",
+
+                "ÉÈẸẺẼÊẾỀỆỂỄ",
+
+                "óòọỏõôốồộổỗơớờợởỡ",
+
+                "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+
+                "úùụủũưứừựửữ",
+
+                "ÚÙỤỦŨƯỨỪỰỬỮ",
+
+                "íìịỉĩ",
+
+                "ÍÌỊỈĨ",
+
+                "đ",
+
+                "Đ",
+
+                "ýỳỵỷỹ",
+
+                "ÝỲỴỶỸ"
+            };
+
+        }
+
+        private void rowClick(object sender, DataGridViewRowDividerDoubleClickEventArgs e)
+        {
+            
+        }
+
+        public void onResultSuccess(object data, string key)
+        {
+
         }
     }
 }

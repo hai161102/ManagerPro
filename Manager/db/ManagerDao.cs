@@ -57,10 +57,10 @@ namespace Manager.db
             {
                 connection = GetConnection();
                 string query = "insert into NhanVien values (" 
-                    + "N'" + nhanvien.ChiNhanh.MaChiNhanh
+                    + "'" + nhanvien.ChiNhanh.MaChiNhanh
                     + "', N'" + nhanvien.HoTen
-                    + "', N'" + nhanvien.SoDienThoai
-                    + "', N'" + nhanvien.ChucVu.MaChucVu
+                    + "', '" + nhanvien.SoDienThoai
+                    + "', '" + nhanvien.ChucVu.MaChucVu
                     + "', '" + nhanvien.NgaySinh.ToString(DATE_FORMAT)
                     + "', N'" + nhanvien.GioiTinh
                     + "', N'" + nhanvien.QueQuan
@@ -69,12 +69,88 @@ namespace Manager.db
                 SqlCommand command = new SqlCommand(query, connection);
                 if (command.ExecuteNonQuery() < 0)
                 {
+                    connection.Close();
                     iDatabaseModel.onFailure("Some error!");
+                    return;
+                }
+                
+            }
+            catch (Exception e)
+            {
+
+                iDatabaseModel.onFailure(e.Message);
+            }
+            iDatabaseModel.onSuccess(getNhanVien(nhanvien), "insert_success");
+
+        }
+
+        public void createAccount(UserAccount userAccount)
+        {
+            try
+            {
+                connection = GetConnection();
+                string query = $"insert into AccountManager values ('{userAccount.getUserName()}', '{userAccount.getPassword()}', '{userAccount.getPermission()}', {userAccount.getNhanVien().Id})";
+                SqlCommand sqlCommand = new SqlCommand(query, connection);
+                if (sqlCommand.ExecuteNonQuery() < 0)
+                {
+                    iDatabaseModel.onFailure("Add Account Failed!");
+                }
+                else
+                {
+                    iDatabaseModel.onSuccess(null, "add_account_done");
+                }
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                iDatabaseModel.onFailure(e.Message);
+            }
+        }
+
+        public void updateData(object currentData, object newData)
+        {
+            NhanVien currentManager = (NhanVien)currentData;
+            NhanVien newManager = (NhanVien)newData;
+            try
+            {
+                connection = GetConnection();
+                string query =
+                    $"update NhanVien set MaChiNhanh = '{newManager.ChiNhanh.MaChiNhanh}', HoTen = '{newManager.HoTen}', SoDienThoai = '{newManager.SoDienThoai}', MaChucVu = '{newManager.ChucVu.MaChucVu}', NgaySinh = '{newManager.NgaySinh.ToString(DATE_FORMAT)}', GioiTinh = '{newManager.GioiTinh}', QueQuan = '{newManager.QueQuan}', BacLuong = {newManager.BacLuong.BacLuong} where MaNhanVien = {currentManager.Id}";
+                SqlCommand sqlCommand = new SqlCommand(query, connection);
+                if (sqlCommand.ExecuteNonQuery() < 0)
+                {
+                    iDatabaseModel.onFailure("Please check information agian!");
+                }
+                else
+                {
+                    iDatabaseModel.onSuccess(newManager);
+                }
+                connection.Close();   
+            }
+            catch (Exception e)
+            {
+                iDatabaseModel.onFailure(e.Message);
+            }
+        }
+
+        public void deleteData(object data)
+        {
+            NhanVien nhanVien = (NhanVien)data;
+            try
+            {
+                connection = GetConnection();
+                string query = $"detele from NhanVien where MaNhanVien = {nhanVien.Id}";
+
+                SqlCommand sqlCommand = new SqlCommand(query, connection);
+                if (sqlCommand.ExecuteNonQuery() < 0)
+                {
+                    iDatabaseModel.onFailure($"Error! Cannot delete this {data.GetType().Name}");
                 }
                 else
                 {
                     getNhanVienList();
                 }
+                connection.Close();
 
             }
             catch (Exception e)
@@ -82,10 +158,88 @@ namespace Manager.db
 
                 iDatabaseModel.onFailure(e.Message);
             }
-            
-            
+        }
+        
+        public void getListChiNhanh()
+        {
+            List<ChiNhanh> chiNhanhs = new List<ChiNhanh>();
+            try
+            {
+                connection = GetConnection();
+                string query = "select * from ChiNhanh";
+                SqlCommand sqlCommand = new SqlCommand(query, connection);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    chiNhanhs.Add(new ChiNhanh(
+                            reader["MaChiNhanh"].ToString(),
+                            reader["TenChiNhanh"].ToString(),
+                            reader["DiaChi"].ToString(),
+                            reader["Hoiline"].ToString()
+                        ));
+                }
+                connection.Close();
+                iDatabaseModel.onSuccess(chiNhanhs, "all_chi_nhanh");
+            }
+            catch (Exception e)
+            {
+                iDatabaseModel.onFailure(e.Message);
+            }
+        }
+        public void getListChucVu()
+        {
+            List<ChucVu> chucVus = new List<ChucVu>();
+            try
+            {
+                connection = GetConnection();
+                string query = "select * from ChucVu";
+                SqlCommand sqlCommand = new SqlCommand(query, connection);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    chucVus.Add(new ChucVu(
+                            reader["MaChucVu"].ToString(),
+                            reader["TenChucVu"].ToString()
+                        ));
+                }
+                connection.Close();
+                iDatabaseModel.onSuccess(chucVus, "all_chuc_vu");
+
+            }
+            catch (Exception e)
+            {
+                iDatabaseModel.onFailure(e.Message);
+            }
         }
 
+        public void getListLuong()
+        {
+            List<Luong> luongs = new List<Luong>();
+            try
+            {
+                connection = GetConnection();
+                string query = "select * from Luong";
+                SqlCommand sqlCommand = new SqlCommand(query, connection);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    luongs.Add(new Luong(
+                            Int32.Parse(reader["BacLuong"].ToString()),
+                            float.Parse(reader["LuongCoBan"].ToString()),
+                            float.Parse(reader["Hesoluong"].ToString()),
+                            float.Parse(reader["PhuCap"].ToString())
+                        ));
+                }
+                connection.Close();
+
+                iDatabaseModel.onSuccess(luongs, "all_luong");
+            }
+            catch (Exception e)
+            {
+
+                iDatabaseModel.onFailure(e.Message);
+            }
+        }
         public void getNhanVienList()
         {
             List<NhanVien> list = new List<NhanVien>();
@@ -230,6 +384,61 @@ namespace Manager.db
             iDatabaseModel.onSuccess(nhanVien);
         }
 
+        public void getManagerInformation(NhanVien nhan)
+        {
+            NhanVien nhanVien = new NhanVien();
+            try
+            {
+                connection = GetConnection();
+                string query = $"Select * from NhanVien where MaChiNhanh = '{nhan.ChiNhanh.MaChiNhanh}' and HoTen = N'{nhan.HoTen}' and CONVERT(VARCHAR, SoDienThoai) = '{nhan.SoDienThoai}' and MaChucVu = '{nhan.ChucVu.MaChucVu}' and NgaySinh = '{nhan.NgaySinh.ToString(DATE_FORMAT)}' and GioiTinh = N'{nhan.GioiTinh}' and QueQuan = N'{nhan.QueQuan}' and BacLuong = {nhan.BacLuong.BacLuong}";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader oReader = cmd.ExecuteReader();
+                while (oReader.Read())
+                {
+                    try
+                    {
+
+                        ChiNhanh chinhanh = new ChiNhanh();
+                        ChucVu chucVu = new ChucVu();
+                        Luong luong = new Luong();
+
+                        chinhanh.MaChiNhanh = oReader["MaChiNhanh"].ToString();
+                        chucVu.MaChucVu = oReader["MaChucVu"].ToString();
+                        luong.BacLuong = Int32.Parse(oReader["BacLuong"].ToString());
+
+                        nhanVien = new NhanVien(
+                        Int32.Parse(oReader["MaNhanVien"].ToString()),
+                        oReader["HoTen"].ToString(),
+                        oReader["SoDienThoai"].ToString(),
+                        DateTime.Parse(oReader["NgaySinh"].ToString()),
+                        oReader["GioiTinh"].ToString(),
+                        oReader["QueQuan"].ToString(),
+                        chinhanh,
+                        chucVu,
+                        luong);
+
+                    }
+                    catch (Exception e)
+                    {
+                        iDatabaseModel.onFailure(e.Message);
+                    }
+
+                }
+                cmd.Dispose();
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                iDatabaseModel.onFailure(e.Message);
+            }
+            nhanVien.ChiNhanh = getChiNhanh("Select * from ChiNhanh where MaChiNhanh = '" + nhanVien.ChiNhanh.MaChiNhanh + "'");
+            nhanVien.ChucVu = getChucVu("Select * from ChucVu where MaChucVu = '" + nhanVien.ChucVu.MaChucVu + "'");
+            nhanVien.BacLuong = getLuong("Select * from Luong where BacLuong = " + nhanVien.BacLuong.BacLuong);
+
+            iDatabaseModel.onSuccess(nhanVien);
+        }
+
         public NhanVien getNhanVien(int id)
         {
             NhanVien nhanVien = new NhanVien();
@@ -275,6 +484,68 @@ namespace Manager.db
             }
             catch (Exception e)
             {
+            }
+            nhanVien.ChiNhanh = getChiNhanh("Select * from ChiNhanh where MaChiNhanh = '" + nhanVien.ChiNhanh.MaChiNhanh + "'");
+            nhanVien.ChucVu = getChucVu("Select * from ChucVu where MaChucVu = '" + nhanVien.ChucVu.MaChucVu + "'");
+            nhanVien.BacLuong = getLuong("Select * from Luong where BacLuong = " + nhanVien.BacLuong.BacLuong);
+
+            return nhanVien;
+        }
+        public NhanVien getNhanVien(NhanVien nhan)
+        {
+            NhanVien nhanVien = new NhanVien();
+            try
+            {
+                connection = GetConnection();
+                string query = $"Select * from NhanVien where " +
+                    $"MaChiNhanh = '{nhan.ChiNhanh.MaChiNhanh}'" +
+                    $" and HoTen = N'{nhan.HoTen}'" +
+                    $" and CONVERT(VARCHAR, SoDienThoai) = '{nhan.SoDienThoai}'" +
+                    $" and MaChucVu = '{nhan.ChucVu.MaChucVu}'" +
+                    $" and NgaySinh = '{nhan.NgaySinh.ToString(DATE_FORMAT)}'" +
+                    $" and GioiTinh = N'{nhan.GioiTinh}'" +
+                    $" and QueQuan = N'{nhan.QueQuan}'" +
+                    $" and BacLuong = {nhan.BacLuong.BacLuong};";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlDataReader oReader = cmd.ExecuteReader();
+                while (oReader.Read())
+                {
+                    try
+                    {
+
+                        ChiNhanh chinhanh = new ChiNhanh();
+                        ChucVu chucVu = new ChucVu();
+                        Luong luong = new Luong();
+
+                        chinhanh.MaChiNhanh = oReader["MaChiNhanh"].ToString();
+                        chucVu.MaChucVu = oReader["MaChucVu"].ToString();
+                        luong.BacLuong = Int32.Parse(oReader["BacLuong"].ToString());
+
+                        nhanVien = new NhanVien(
+                        Int32.Parse(oReader["MaNhanVien"].ToString()),
+                        oReader["HoTen"].ToString(),
+                        oReader["SoDienThoai"].ToString(),
+                        DateTime.Parse(oReader["NgaySinh"].ToString()),
+                        oReader["GioiTinh"].ToString(),
+                        oReader["QueQuan"].ToString(),
+                        chinhanh,
+                        chucVu,
+                        luong);
+
+                    }
+                    catch (Exception e)
+                    {
+                        iDatabaseModel.onFailure(e.Message);
+                    }
+
+                }
+                cmd.Dispose();
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                iDatabaseModel.onFailure(e.Message);
             }
             nhanVien.ChiNhanh = getChiNhanh("Select * from ChiNhanh where MaChiNhanh = '" + nhanVien.ChiNhanh.MaChiNhanh + "'");
             nhanVien.ChucVu = getChucVu("Select * from ChucVu where MaChucVu = '" + nhanVien.ChucVu.MaChucVu + "'");

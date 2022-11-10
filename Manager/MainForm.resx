@@ -126,43 +126,43 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>180, 26</value>
   </data>
   <data name="search.Text" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="add.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>180, 26</value>
   </data>
   <data name="add.Text" xml:space="preserve">
     <value>Add</value>
   </data>
   <data name="update.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>180, 26</value>
   </data>
   <data name="update.Text" xml:space="preserve">
     <value>Update</value>
   </data>
   <data name="delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>180, 26</value>
   </data>
   <data name="delete.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="view.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>180, 26</value>
   </data>
   <data name="view.Text" xml:space="preserve">
     <value>View</value>
   </data>
   <data name="exit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>180, 26</value>
   </data>
   <data name="exit.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="option.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 12pt, style=Bold</value>
@@ -174,16 +174,22 @@
     <value>Option</value>
   </data>
   <data name="accountOption1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>137, 26</value>
   </data>
   <data name="accountOption1.Text" xml:space="preserve">
     <value>Normal</value>
   </data>
   <data name="accountOption2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 26</value>
+    <value>137, 26</value>
   </data>
   <data name="accountOption2.Text" xml:space="preserve">
     <value>Admin</value>
+  </data>
+  <data name="logOutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 26</value>
+  </data>
+  <data name="logOutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Log out</value>
   </data>
   <data name="account.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 12pt, style=Bold</value>
@@ -349,6 +355,12 @@
     <value>accountOption2</value>
   </data>
   <data name="&gt;&gt;accountOption2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logOutToolStripMenuItem.Name" xml:space="preserve">
+    <value>logOutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;logOutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

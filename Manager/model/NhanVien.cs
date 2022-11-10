@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Manager.model
 {
@@ -35,7 +36,6 @@ namespace Manager.model
             this.ChucVu = chucVu;
             this.BacLuong = bacLuong;
         }
-
         public int Id { get => id; set => id = value; }
         public string HoTen { get => hoTen; set => hoTen = value; }
         public string SoDienThoai { get => soDienThoai; set => soDienThoai = value; }
@@ -45,5 +45,6 @@ namespace Manager.model
         public ChiNhanh ChiNhanh { get => chiNhanh; set => chiNhanh = value; }
         public ChucVu ChucVu { get => chucVu; set => chucVu = value; }
         public Luong BacLuong { get => bacLuong; set => bacLuong = value; }
+
     }
 }

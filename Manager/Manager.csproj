@@ -55,6 +55,12 @@
   <ItemGroup>
     <Compile Include="Const.cs" />
     <Compile Include="db\ManagerDao.cs" />
+    <Compile Include="form\dialog\OptionRightClickDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\dialog\OptionRightClickDialog.Designer.cs">
+      <DependentUpon>OptionRightClickDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\DoiMK_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,12 @@
     </Compile>
     <Compile Include="form\LoginFrom.Designer.cs">
       <DependentUpon>LoginFrom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="form\TinhLuongForm.cs">
       <SubType>Form</SubType>
@@ -127,6 +139,7 @@
     <Compile Include="model\model\DatabaseModel.cs" />
     <Compile Include="model\model\IDatabaseModel.cs" />
     <Compile Include="model\NhanVien.cs" />
+    <Compile Include="model\Permission.cs" />
     <Compile Include="presenter\DatabasePresenter.cs" />
     <Compile Include="presenter\LoginPresenter.cs" />
     <Compile Include="Program.cs" />
@@ -136,6 +149,9 @@
     </Compile>
     <Compile Include="view\interfaces\IDataView.cs" />
     <Compile Include="view\interfaces\ILoginView.cs" />
+    <EmbeddedResource Include="form\dialog\OptionRightClickDialog.resx">
+      <DependentUpon>OptionRightClickDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\DoiMK_Form.resx">
       <DependentUpon>DoiMK_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\TinhLuongForm.resx">
       <DependentUpon>TinhLuongForm.cs</DependentUpon>

@@ -10,5 +10,6 @@ namespace Manager.model.model
     {
         void onSuccess(Object data);
         void onFailure(String message);
+        void onSuccess(Object data, string key);
     }
 }

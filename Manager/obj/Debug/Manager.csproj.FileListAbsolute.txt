@@ -19,3 +19,5 @@ D:\visual\Manager\Manager\obj\Debug\Manager.form.InformationForm.resources
 D:\visual\Manager\Manager\obj\Debug\Manager.form.TinhLuongForm.resources
 D:\visual\Manager\Manager\obj\Debug\Manager.form.XingNghiPhep_form.resources
 D:\visual\Manager\Manager\obj\Debug\Manager.form.ChangePasswordForm.resources
+D:\visual\Manager\Manager\obj\Debug\Manager.form.SearchForm.resources
+D:\visual\Manager\Manager\obj\Debug\Manager.form.dialog.OptionRightClickDialog.resources

@@ -10,5 +10,7 @@ namespace Manager.view.interfaces
     {
         void onResultSuccess(Object data);
         void onResultError(String message);
+
+        void onResultSuccess(Object data, string key);
     }
 }

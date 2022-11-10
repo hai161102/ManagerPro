@@ -38,7 +38,7 @@ namespace Manager.model
             //new StringBuilder(),
             //(sb, pair) => sb.AppendLine($"{pair.Name}: {pair.Value}"),
             //sb => sb.ToString());
-            return this.maChiNhanh;
+            return this.tenChiNhanh;
         }
 
         public override bool Equals(object obj)
