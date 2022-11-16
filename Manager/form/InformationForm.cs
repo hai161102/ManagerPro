@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Sql;
 using Manager.model;
+using static Manager.form.ChangePasswordForm;
 
 namespace Manager.form
 {
-    public partial class InformationForm : Form
+    public partial class InformationForm : Form, OnActionCallback
     {
         private NhanVien nhanVien = new NhanVien();
         public InformationForm()
@@ -52,9 +53,12 @@ namespace Manager.form
 
         private void btnChangePass_Click(object sender, EventArgs e)
         {
-            ChangePasswordForm changePassword = new ChangePasswordForm();
+            ChangePasswordForm changePassword = new ChangePasswordForm(this);
+            this.ParentForm.Hide();
             changePassword.Show();
         }
+
+        
         private void onLoad(object sender, EventArgs e)
         {
 
@@ -80,6 +84,14 @@ namespace Manager.form
         private void infoManagerLevel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void callback(string key, object data)
+        {
+            if (key == "close")
+            {
+                this.ParentForm.Show();
+            }
         }
     }
 }

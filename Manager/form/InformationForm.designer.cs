@@ -169,9 +169,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(322, 85);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 21);
+            this.label7.Size = new System.Drawing.Size(103, 21);
             this.label7.TabIndex = 4;
-            this.label7.Text = "Ngay Sinh";
+            this.label7.Text = "Date of Birth";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label6
@@ -179,9 +179,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(322, 124);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 21);
+            this.label6.Size = new System.Drawing.Size(64, 21);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Gioi tinh";
+            this.label6.Text = "Gender";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label5

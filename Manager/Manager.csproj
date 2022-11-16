@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Const.cs" />
+    <Compile Include="context\MyApplication.cs" />
     <Compile Include="db\ManagerDao.cs" />
     <Compile Include="form\dialog\OptionRightClickDialog.cs">
       <SubType>Form</SubType>
@@ -140,6 +141,7 @@
     <Compile Include="model\model\IDatabaseModel.cs" />
     <Compile Include="model\NhanVien.cs" />
     <Compile Include="model\Permission.cs" />
+    <Compile Include="OnActionCallback.cs" />
     <Compile Include="presenter\DatabasePresenter.cs" />
     <Compile Include="presenter\LoginPresenter.cs" />
     <Compile Include="Program.cs" />

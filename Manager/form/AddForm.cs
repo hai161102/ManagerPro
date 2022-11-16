@@ -138,7 +138,6 @@ namespace Manager.form
                         luong
                     );
                 databasePresenter.addMember(nhanvien);
-                addButton.Enabled = false;
             }
             
         }
@@ -196,6 +195,7 @@ namespace Manager.form
             }
             else if (key == "insert_success")
             {
+                addButton.Enabled = false;
                 NhanVien nhan = data as NhanVien;
                 if (nhan != null)
                 {

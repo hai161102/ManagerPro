@@ -17,8 +17,10 @@ namespace Manager.form
     {
 
         private DatabasePresenter databasePresenter;
-        public ChangePasswordForm()
+        private OnActionCallback onActionCallback;
+        public ChangePasswordForm(OnActionCallback onActionCallback)
         {
+            this.onActionCallback = onActionCallback;
             databasePresenter = new DatabasePresenter(this);
             InitializeComponent();
         }
@@ -55,6 +57,7 @@ namespace Manager.form
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            onActionCallback.callback("close", null);
             this.Close();
         }
 
@@ -81,12 +84,13 @@ namespace Manager.form
         {
             if (data.GetType() == typeof(string))
             {
-                if (data == "updateSuccess")
+                if (data != "updateSuccess")
                 {
-                    CurrentAccount.getInstance().getAccount().setPassword(confirmPass.Text);
-                    Const.saveData(CurrentAccount.getInstance().getAccount());
-                    this.Close();
+                    return;
                 }
+                CurrentAccount.getInstance().getAccount().setPassword(confirmPass.Text);
+                Const.saveData(CurrentAccount.getInstance().getAccount());
+                this.Close();
             }
         }
 
@@ -123,5 +127,6 @@ namespace Manager.form
         {
             throw new NotImplementedException();
         }
+        
     }
 }

@@ -34,7 +34,7 @@ namespace Manager
         public MainForm()
         {
             InitializeComponent();
-            
+            dataGridView1.CellDoubleClick += DataGridView1_CellClick;
         }
 
 
@@ -47,8 +47,6 @@ namespace Manager
         private void setViewNormal()
         {
             this.Enabled = true;
-            dataGridView1.CellDoubleClick += DataGridView1_CellClick;
-            dataGridView1.CellMouseClick += DataGridView1_CellMouseDown;
             if (CurrentAccount.getInstance().getAccount() == null)
             {
                 this.accountOption1.Text = LOGIN;
@@ -77,23 +75,12 @@ namespace Manager
                 }
                 else if (CurrentAccount.getInstance().getAccount().getPermission() == Permission.COMPANY)
                 {
-                    setViewAdmin();
 
                 }
             }
         }
 
-        private void DataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                clickPoint = new Point();
-                clickPoint.X = MousePosition.X;
-                clickPoint.Y = MousePosition.Y;
-                dialog = new OptionRightClickDialog(clickPoint, new OnDialogClick(this));
-                dialog.Show();
-            }
-        }
+        
 
         private class OnDialogClick : OptionRightClickDialog.OnOptionClick
         {
@@ -134,7 +121,9 @@ namespace Manager
 
         private void setViewAdmin()
         {
-
+            databasePresenter.getManagerDao().getNhanVienList();
+            panelManagerInfo.Visible = false;
+            dataGridView1.Visible = true;
         }
 
         private class AfterCLoseView : OnClickListener
@@ -232,12 +221,50 @@ namespace Manager
         }
         private void update_Click(object sender, EventArgs e)
         {
+            setViewAdmin();
+            dataGridView1.CellDoubleClick -= DataGridView1_CellClick;
+            MessageBox.Show("Click row to update data");
+            dataGridView1.CellClick += DataGridView1_CellClick1;
 
+        }
+
+        private void DataGridView1_CellClick1(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.ReadOnly = false;
+            foreach (DataGridViewRow item in dataGridView1.Rows)
+            {
+                item.ReadOnly = true;
+            }
+            dataGridView1.Rows[e.RowIndex].ReadOnly = false;
+            //if (dataGridView1.Rows[e.RowIndex])
+            //{
+
+            //}
         }
 
         private void delete_Click(object sender, EventArgs e)
         {
+            setViewAdmin();
+            MessageBox.Show("Click row to delete data");
+            dataGridView1.CellClick += CellDeleteClick;
+        }
 
+        private void CellDeleteClick(object sender, DataGridViewCellEventArgs ex)
+        {
+            databasePresenter.getManagerDao().deleteData(nhanViens[ex.RowIndex]);
+            nhanViens.RemoveAt(ex.RowIndex);
+            dataGridView1.Rows.RemoveAt(ex.RowIndex);
+            dataGridView1.CellClick -= CellDeleteClick;
+        }
+
+        private void removeClickEvent(Control b)
+        {
+            FieldInfo f1 = typeof(Control).GetField("EventClick", BindingFlags.NonPublic | BindingFlags.Instance);
+            object obj = f1.GetValue(b);
+            PropertyInfo pi = b.GetType().GetProperty("Events", BindingFlags.NonPublic| BindingFlags.Instance);
+
+            EventHandlerList eventHandlerList = (EventHandlerList)pi.GetValue(obj, null);
+            eventHandlerList.RemoveHandler(obj, eventHandlerList[obj]);
         }
 
         private void view_Click(object sender, EventArgs e)
@@ -252,9 +279,7 @@ namespace Manager
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
-            
             setViewNormal();
-            
         }
 
         private List<ToolStripMenuItem> getListMenu(Type propertyInfo)
@@ -393,7 +418,7 @@ namespace Manager
 
             public void onAgree(object[] datas)
             {
-                form.setViewInformation((NhanVien)datas[0]);
+                form.setViewInformation(form.databasePresenter.getManagerDao().getNhanVien((NhanVien)datas[0]) );
             }
 
             public void onCancel()
@@ -460,7 +485,6 @@ namespace Manager
                                 {
                                     property = item.GetType().GetProperty(propertySearch);
                                     value = property.GetValue(item.GetValue(n, null), null);
-                                    
                                     break;
                                 }
                                 

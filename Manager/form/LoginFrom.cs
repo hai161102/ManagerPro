@@ -48,8 +48,6 @@ namespace Manager.form
             account.setUserName(username);
             account.setPassword(pass);
             databasePresenter.login(account);
-
-            
         }
 
         private void signup_Click(object sender, EventArgs e)

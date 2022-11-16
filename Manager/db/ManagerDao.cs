@@ -107,15 +107,14 @@ namespace Manager.db
             }
         }
 
-        public void updateData(object currentData, object newData)
+        public void updateData(object newData)
         {
-            NhanVien currentManager = (NhanVien)currentData;
             NhanVien newManager = (NhanVien)newData;
             try
             {
                 connection = GetConnection();
                 string query =
-                    $"update NhanVien set MaChiNhanh = '{newManager.ChiNhanh.MaChiNhanh}', HoTen = '{newManager.HoTen}', SoDienThoai = '{newManager.SoDienThoai}', MaChucVu = '{newManager.ChucVu.MaChucVu}', NgaySinh = '{newManager.NgaySinh.ToString(DATE_FORMAT)}', GioiTinh = '{newManager.GioiTinh}', QueQuan = '{newManager.QueQuan}', BacLuong = {newManager.BacLuong.BacLuong} where MaNhanVien = {currentManager.Id}";
+                    $"update NhanVien set MaChiNhanh = '{newManager.ChiNhanh.MaChiNhanh}', HoTen = '{newManager.HoTen}', SoDienThoai = '{newManager.SoDienThoai}', MaChucVu = '{newManager.ChucVu.MaChucVu}', NgaySinh = '{newManager.NgaySinh.ToString(DATE_FORMAT)}', GioiTinh = '{newManager.GioiTinh}', QueQuan = '{newManager.QueQuan}', BacLuong = {newManager.BacLuong.BacLuong} where MaNhanVien = {newManager.Id}";
                 SqlCommand sqlCommand = new SqlCommand(query, connection);
                 if (sqlCommand.ExecuteNonQuery() < 0)
                 {
@@ -138,8 +137,11 @@ namespace Manager.db
             NhanVien nhanVien = (NhanVien)data;
             try
             {
+                deleteDataFromTable("ChamCong", "MaNhanVien", nhanVien.Id);
+                deleteDataFromTable("AccountManager", "managerId", nhanVien.Id);
                 connection = GetConnection();
-                string query = $"detele from NhanVien where MaNhanVien = {nhanVien.Id}";
+                string query = $"delete from NhanVien where MaNhanVien = {nhanVien.Id}";
+               
 
                 SqlCommand sqlCommand = new SqlCommand(query, connection);
                 if (sqlCommand.ExecuteNonQuery() < 0)
@@ -151,6 +153,37 @@ namespace Manager.db
                     getNhanVienList();
                 }
                 connection.Close();
+
+
+            }
+            catch (Exception e)
+            {
+
+                iDatabaseModel.onFailure(e.Message);
+            }
+        }
+
+        private void deleteDataFromTable(string tbName, string fiel, object data)
+        {
+            try
+            {
+                string query = $"delete from {tbName} where {fiel} = ";
+                if (data.GetType() != typeof(string))
+                {
+                    query += data;
+                }
+                else
+                {
+                    query += $"N'{data}'";
+                }
+                connection = GetConnection();
+                SqlCommand sqlCommand = new SqlCommand(query, connection);
+                if (sqlCommand.ExecuteNonQuery() < 0)
+                {
+                    iDatabaseModel.onFailure($"Error! Cannot delete this {data.GetType().Name}");
+                }
+                connection.Close();
+
 
             }
             catch (Exception e)

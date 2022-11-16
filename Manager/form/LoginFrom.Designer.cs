@@ -86,6 +86,7 @@
             this.tbPass.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPass.Location = new System.Drawing.Point(25, 43);
             this.tbPass.Name = "tbPass";
+            this.tbPass.PasswordChar = '*';
             this.tbPass.Size = new System.Drawing.Size(248, 15);
             this.tbPass.TabIndex = 3;
             this.tbPass.TextChanged += new System.EventHandler(this.tbPass_TextChanged);

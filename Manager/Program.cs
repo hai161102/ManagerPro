@@ -1,4 +1,5 @@
-﻿using Manager.db;
+﻿using Manager.context;
+using Manager.db;
 using Manager.form;
 using Manager.interfaces;
 using Manager.model;
@@ -20,55 +21,17 @@ namespace Manager
         /// </summary>
         /// 
         public static string CONNECTION_STRING = @"Data Source=HAI;Initial Catalog=Nhom_12;Integrated Security=True";
-        static LoginFrom login;
-
+        static MyApplication applicationContext;
         [STAThread]
         static void Main()
         {
-
-            Const.FONT_FAMILY = Const.getFont(Properties.Resources.Roboto_Regular).Families[0];
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (Const.readDataSave().getUserName() != "" && Const.readDataSave().getPassword() != ""
-                && Const.readDataSave().getUserName() != null && Const.readDataSave().getPassword() != null)
-            {
-                LoginPresenter login = new LoginPresenter(new ViewLogin());
-                login.login(Const.readDataSave());
-            }
-            else
-            {
-                login = new LoginFrom(new LoginListen());
-                Application.Run(login);
-
-            }
+            applicationContext = new MyApplication();
+            Application.Run(applicationContext);
 
         }
 
-        public class LoginListen : LoginListener
-        {
-            public void gotoSignUp()
-            {
-            }
-
-            public void loginSuccess()
-            {
-                login.Close();
-                Application.Restart();
-                Application.Run(new MainForm());
-            }
-        }
-        public class ViewLogin : ILoginView
-        {
-            public void onLoginFailure(string message)
-            {
-                MessageBox.Show(message);
-            }
-
-            public void onLoginSuccess(object data)
-            {
-                CurrentAccount.getInstance().setAccount((UserAccount)data);
-                Application.Run(new MainForm());
-            }
-        }
     }
 }
