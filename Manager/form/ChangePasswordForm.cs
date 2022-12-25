@@ -125,7 +125,6 @@ namespace Manager.form
 
         public void onResultSuccess(object data, string key)
         {
-            throw new NotImplementedException();
         }
         
     }

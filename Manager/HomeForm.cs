@@ -16,8 +16,9 @@ using static Manager.form.SearchForm;
 
 namespace Manager
 {
-    public partial class MainForm : Form, IDataView
+    public partial class HomeForm : Form, IDataView
     {
+        private static HomeForm instance;
         private string LOGIN = "Login";
         private string SIGN_UP = "Sign Up";
         private string NORMAL = "Normal";
@@ -28,16 +29,27 @@ namespace Manager
         private BindingSource bindingSource = new BindingSource();
         private SearchForm searchForm;
         private static List<NhanVien> nhanViens;
-        private Point clickPoint;
-        private static OptionRightClickDialog dialog;
+        private static FormListener formListener;
 
-        public MainForm()
+        private HomeForm()
         {
             InitializeComponent();
             dataGridView1.CellDoubleClick += DataGridView1_CellClick;
         }
 
+        public static HomeForm getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new HomeForm();
+            }
+            return instance;
+        }
 
+        public void setFormListener(FormListener listener)
+        {
+            formListener = listener;
+        }
         //{
         //    loginForm = new LoginForm(this);
         //    loginForm.onCloseClick = new AfterCLoseView(this);
@@ -84,11 +96,11 @@ namespace Manager
 
         private class OnDialogClick : OptionRightClickDialog.OnOptionClick
         {
-            private MainForm mainForm;
+            private HomeForm HomeForm;
 
-            public OnDialogClick(MainForm mainForm)
+            public OnDialogClick(HomeForm HomeForm)
             {
-                this.mainForm = mainForm;
+                this.HomeForm = HomeForm;
             }
 
             public void onDelete()
@@ -128,9 +140,9 @@ namespace Manager
 
         private class AfterCLoseView : OnClickListener
         {
-            private MainForm form1;
+            private HomeForm form1;
 
-            public AfterCLoseView(MainForm form1)
+            public AfterCLoseView(HomeForm form1)
             {
                 this.form1 = form1;
             }
@@ -408,9 +420,9 @@ namespace Manager
 
         private class ViewControlAddForm : OnViewControlListener
         {
-            MainForm form;
+            HomeForm form;
 
-            public ViewControlAddForm(MainForm form)
+            public ViewControlAddForm(HomeForm form)
             {
                 this.form = form;
             }
@@ -429,7 +441,8 @@ namespace Manager
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Const.clearData(Const.FILE_NAME);
+            formListener.onClose("Logout", null);
         }
 
         private void searchByProperty(string propertyName)
@@ -444,9 +457,9 @@ namespace Manager
         {
             private List<NhanVien> lSearch;
             private string propertySearch;
-            private MainForm form;
+            private HomeForm form;
 
-            public SearchListen(List<NhanVien> search, string property, MainForm form)
+            public SearchListen(List<NhanVien> search, string property, HomeForm form)
             {
                 this.lSearch = search;
                 this.propertySearch = property;
@@ -569,6 +582,11 @@ namespace Manager
         }
 
         public void onResultSuccess(object data, string key)
+        {
+
+        }
+
+        private void panelManagerInfo_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -12,69 +12,94 @@ using System.Windows.Forms;
 
 namespace Manager.context
 {
-    public class MyApplication : ApplicationContext
+    public class MyApplication : ApplicationContext, ILoginView, FormListener, LoginListener
     {
-        private static LoginFrom loginFrom;
-        private static MainForm mainForm;
+        private LoginFrom loginFrom;
+        private HomeForm homeForm;
         private LoginPresenter loginPresenter;
+        private bool isLogOut = false;
+
 
         public MyApplication()
         {
-            mainForm = new MainForm();
-            mainForm.FormClosed += MainForm_FormClosed;
+            homeForm = HomeForm.getInstance();
+            homeForm.setFormListener(this);
+            loginFrom = new LoginFrom(this);
+            loginPresenter = new LoginPresenter(this);
+            homeForm.FormClosed += HomeForm_FormClosed;
+            homeForm.FormClosing += onFormClose;
             Const.FONT_FAMILY = Const.getFont(Properties.Resources.Roboto_Regular).Families[0];
             if (Const.readDataSave().getUserName() != "" && Const.readDataSave().getPassword() != ""
                 && Const.readDataSave().getUserName() != null && Const.readDataSave().getPassword() != null)
             {
-                loginPresenter = new LoginPresenter(new ViewLogin());
                 loginPresenter.login(Const.readDataSave());
             }
             else
             {
-                loginFrom = new LoginFrom(new LoginFromListener());
                 loginFrom.Show();
             }
 
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        protected override void OnMainFormClosed(object sender, EventArgs e)
         {
-            this.ExitThread();
+            base.OnMainFormClosed(sender, e);
         }
 
-        public class ViewLogin : ILoginView
+        private void onFormClose(object sender, FormClosingEventArgs e)
+        {
+        }
+
+        public void setMainForm(Form form)
+        {
+            this.MainForm = form;
+        }
+
+        private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!isLogOut)
+            {
+                ExitThread();
+            }
+        }
+
+        public void onLoginSuccess(object data)
+        {
+            CurrentAccount.getInstance().setAccount((UserAccount)data);
+            homeForm.Show();
+        }
+
+        public void onLoginFailure(string message)
+        {
+            MessageBox.Show(message);
+        }
+
+        public void onClose(string key, object value)
+        {
+            if (key == "Logout")
+            {
+                loginFrom = new LoginFrom(this);
+                loginFrom.Show();
+                isLogOut = true;
+                homeForm.Close();
+
+            }
+        }
+
+        public void loginSuccess()
+        {
+            homeForm.Show();
+            if (loginFrom != null)
+            {
+                loginFrom.Close();
+
+            }
+        }
+
+        public void gotoSignUp()
         {
             
-            public void onLoginFailure(string message)
-            {
-                MessageBox.Show(message);
-            }
-
-            public void onLoginSuccess(object data)
-            {
-                CurrentAccount.getInstance().setAccount((UserAccount)data);
-                mainForm.Show();
-            }
         }
 
-        private class LoginFromListener : LoginListener
-        {
-
-
-            public void gotoSignUp()
-            {
-            }
-
-            public void loginSuccess()
-            {
-                mainForm.Show();
-                if (loginFrom != null)
-                {
-                    loginFrom.Close();
-
-                }
-
-            }
-        }
     }
 }

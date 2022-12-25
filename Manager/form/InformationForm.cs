@@ -55,15 +55,20 @@ namespace Manager.form
         {
             ChangePasswordForm changePassword = new ChangePasswordForm(this);
             this.ParentForm.Hide();
+            changePassword.FormClosed += onChangePassDone;
             changePassword.Show();
         }
 
-        
+        private void onChangePassDone(object sender, FormClosedEventArgs e)
+        {
+            this.ParentForm.Show();
+        }
+
         private void onLoad(object sender, EventArgs e)
         {
 
             infoManagerID.Text = nhanVien.Id.ToString();
-            infoManagerName.Text = nhanVien.HoTen.ToString();
+            infoManagerName.Text = nhanVien.HoTen;
             infoManagerLevel.Text = nhanVien.ChucVu.ChucVuName;
             infoManagerHometown.Text = nhanVien.QueQuan;
             infoManagerSex.Text = nhanVien.GioiTinh;

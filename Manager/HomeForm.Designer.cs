@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Manager
 {
-    partial class MainForm
+    partial class HomeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -25,8 +25,8 @@ namespace Manager
         }
 
         #region Windows Form Designer generated code
-        
-       
+
+
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -34,7 +34,7 @@ namespace Manager
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -192,7 +192,7 @@ namespace Manager
             resources.ApplyResources(this.panelManagerInfo, "panelManagerInfo");
             this.panelManagerInfo.Name = "panelManagerInfo";
             // 
-            // MainForm
+            // HomeForm
             // 
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.panelManagerInfo);
@@ -200,7 +200,7 @@ namespace Manager
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "MainForm";
+            this.Name = "HomeForm";
             this.Load += new System.EventHandler(this.Form1_Load_1);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -114,7 +114,16 @@ namespace Manager.db
             {
                 connection = GetConnection();
                 string query =
-                    $"update NhanVien set MaChiNhanh = '{newManager.ChiNhanh.MaChiNhanh}', HoTen = '{newManager.HoTen}', SoDienThoai = '{newManager.SoDienThoai}', MaChucVu = '{newManager.ChucVu.MaChucVu}', NgaySinh = '{newManager.NgaySinh.ToString(DATE_FORMAT)}', GioiTinh = '{newManager.GioiTinh}', QueQuan = '{newManager.QueQuan}', BacLuong = {newManager.BacLuong.BacLuong} where MaNhanVien = {newManager.Id}";
+                    $"update NhanVien set " +
+                    $"MaChiNhanh = '{newManager.ChiNhanh.MaChiNhanh}', " +
+                    $"HoTen = '{newManager.HoTen}', " +
+                    $"SoDienThoai = '{newManager.SoDienThoai}', " +
+                    $"MaChucVu = '{newManager.ChucVu.MaChucVu}', " +
+                    $"NgaySinh = '{newManager.NgaySinh.ToString(DATE_FORMAT)}', " +
+                    $"GioiTinh = '{newManager.GioiTinh}', " +
+                    $"QueQuan = '{newManager.QueQuan}', " +
+                    $"BacLuong = {newManager.BacLuong.BacLuong} " +
+                    $"where MaNhanVien = {newManager.Id}";
                 SqlCommand sqlCommand = new SqlCommand(query, connection);
                 if (sqlCommand.ExecuteNonQuery() < 0)
                 {

@@ -21,7 +21,7 @@ namespace Manager
         /// </summary>
         /// 
         public static string CONNECTION_STRING = @"Data Source=HAI;Initial Catalog=Nhom_12;Integrated Security=True";
-        static MyApplication applicationContext;
+        public static MyApplication applicationContext;
         [STAThread]
         static void Main()
         {

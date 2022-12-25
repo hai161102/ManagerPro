@@ -27,7 +27,7 @@ namespace Manager
         public static string VIEW_SIGNUP = "VIEW_SIGNUP";
         public static FontFamily FONT_FAMILY = null;
         internal static string MAIN_ACTIVITY = "MAIN_ACTIVITY";
-        public static string FILE_NAME = @"D:\\visual\\Manager\\Manager\\account.txt";
+        public static string FILE_NAME = @"C:\\Users\\vipvl\\Source\\Repos\\ManagerPro\\Manager\\account.txt";
 
         public static PrivateFontCollection getFont(byte[] font)
         {
@@ -87,6 +87,10 @@ namespace Manager
                 streamWriter.WriteLine(accountManager.getPassword());
             }
 
+        }
+        public static void clearData(string path)
+        {
+            System.IO.File.WriteAllText(path, string.Empty);
         }
     }
 }
